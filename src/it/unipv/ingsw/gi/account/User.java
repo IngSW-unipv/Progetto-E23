@@ -1,4 +1,4 @@
-package it.unipv.insw.gi.librarian;
+package it.unipv.ingsw.gi.account;
 
 public class User {
 	private String nome;
