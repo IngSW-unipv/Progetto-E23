@@ -4,7 +4,9 @@ public class User {
 	private String nome;
 	private String cognome;
 	private String indirizzo;
-	public User(String unNome, String unCognome,String unIndirizzo) {
+	
+	
+	private User(String unNome, String unCognome,String unIndirizzo) {
 		nome = unNome;
 		cognome = unCognome;
 		indirizzo = unIndirizzo;
