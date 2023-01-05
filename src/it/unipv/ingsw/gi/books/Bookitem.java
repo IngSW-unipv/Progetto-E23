@@ -1,6 +1,8 @@
 package it.unipv.ingsw.gi.books;
 
-public class Bookitem extends Book {
+
+public class Bookitem {
+
 	
 
 }
