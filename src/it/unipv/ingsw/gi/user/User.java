@@ -1,6 +1,7 @@
 package it.unipv.ingsw.gi.user;
 
 public class User {
+	private static final double Id = 0;
 	private String NOME;
 	private String COGNOME;
 	private String indirizzo;
@@ -24,7 +25,10 @@ public class User {
 		
 		public String toString() {
 			// TODO Auto-generated method stub
-			return "Fornitore ("+NOME+", "+COGNOME+", "+indirizzo+")";
+			return "User ("+NOME+", "+COGNOME+", "+indirizzo+")";
+		}
+		public double getId() {
+			return Id;
 		}
 }
 

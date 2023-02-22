@@ -1,15 +1,14 @@
 package it.unipv.ingsw.gi.dbase;
 
-import java.io.FileInputStream;
 import java.sql.*;
-import java.util.Properties;
+
 
 public class MyDbaseconnect {
 
 public static Connection getConnection() {
 	Connection con=null;
 	try {
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("com.mysql.cj.jdbc.Driver");
 		con=DriverManager.getConnection("jdbc:mysql://localhost:3306/biblioteca", "root", "monDieuestmerveilleux33@");
 	}
 	catch(Exception e) {System.out.println(e);}
