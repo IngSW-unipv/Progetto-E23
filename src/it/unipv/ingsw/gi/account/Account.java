@@ -40,7 +40,7 @@ public class Account {
 
 
 	
-	private AccountState getState() {
+	public AccountState getState() {
 		return state;
 	}
 	private void setState(AccountState state) {
@@ -49,14 +49,32 @@ public class Account {
 	
 	
 	
+	public ArrayList<Book> getHistory() {
+		return History;
+	}
+
+
+	public void setHistory(ArrayList<Book> history) {
+		History = history;
+	}
+
+
+	public LinkedList<Book> getDueBooks() {
+		return dueBooks;
+	}
+
+
+	public void setDueBooks(LinkedList<Book> dueBooks) {
+		this.dueBooks = dueBooks;
+	}
+
+
 	public String toString() {
-		// TODO Auto-generated method stub
-		return "Account ("+id+", "+OPENDATE+", "+state+")";
+		return "Account ("+id+", "+OPENDATE+", "+state+", "+History+", "+dueBooks+")";
 	}
 
 
 	public User[] getUsers() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

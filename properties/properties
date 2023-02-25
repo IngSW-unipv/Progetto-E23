@@ -1,0 +1,8 @@
+DBDRIVER = "com.mysql.jdbc.Driver"
+DBURL = "jdbc:mysql://localhost:3306/biblioteca";
+db_usn=root
+db_psw=monDieuestmerveilleux33@
+db_schema=biblioteca
+
+
+
