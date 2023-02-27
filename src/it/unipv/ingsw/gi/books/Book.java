@@ -7,18 +7,18 @@ public class Book {
 	public String name;
 	public String subject;
 	public String publisher;
-	public Date publicationDate;
+	public Format format;
 	public Language lang;
 	public double ISBN ;
 	
 	
 	
-	public Book(String name, String subject, String publisher, Date publicationDate, Language lang, double iSBN) {
+	public Book(String name, String subject, String publisher, Format format, Language lang, double iSBN) {
 		super();
 		this.name = name;
 		this.subject = subject;
 		this.publisher = publisher;
-		this.publicationDate = publicationDate;
+		this.format = format;
 		this.lang = lang;
 		ISBN = iSBN;
 	}
@@ -61,14 +61,14 @@ public class Book {
 
 
 
-	public Date getPublicationDate() {
-		return publicationDate;
+	public Format getformat() {
+		return format;
 	}
 
 
 
-	public void setPublicationDate(Date publicationDate) {
-		this.publicationDate = publicationDate;
+	public Format setformat(Format format) {
+		return this.format = format;
 	}
 
 
@@ -99,7 +99,7 @@ public class Book {
 	
 	public String toString() {
 		// TODO Auto-generated method stub
-		return "Book ("+ISBN+", "+name+", "+subject+", "+publisher+", "+publicationDate+","+lang+")";
+		return "Book ("+ISBN+", "+name+", "+subject+", "+publisher+", "+format+","+lang+")";
 	}
 	
 	

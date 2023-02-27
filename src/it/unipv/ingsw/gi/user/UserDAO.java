@@ -52,10 +52,10 @@ public ArrayList<Book> getBooksByName(String name) {
              while (resultSet.next()) {
                  String subject = resultSet.getString("subject");
                  String publisher = resultSet.getString("publisher");
-                 Date publicationDate = resultSet.getDate("publicationDate");
+                 Format format = resultSet.getformat("format");
                  Language lang = Language.valueOf(resultSet.getString("language"));
                  double isbn = resultSet.getDouble("isbn");
-                 Book book = new Book(name, subject, publisher, publicationDate, lang, 865);
+                 Book book = new Book(name, subject, publisher, format, lang, 865);
                  books.add(book);
              }
          }

@@ -1,6 +1,7 @@
 package it.unipv.ingsw.gi.books;
 import it.unipv.insw.gi.librarian.*;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,12 +25,12 @@ public class BookDAO implements IBook {
     }
 @Override
     public boolean addBook(Book book) {
-        String query = "INSERT INTO books (name, subject, publisher, publicationDate, language, isbn) VALUES (?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO books (name, subject, publisher, format, language, isbn) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, book.name);
             statement.setString(2, book.subject);
             statement.setString(3, book.publisher);
-            statement.setDate(4, new java.sql.Date(book.publicationDate.getTime()));
+            statement.setformat(4, new java.sql.Date(book.format.getTime()));
             statement.setString(5, book.lang.toString());
             statement.setDouble(6, book.ISBN);
             int rowsInserted = statement.executeUpdate();
@@ -61,10 +62,10 @@ public class BookDAO implements IBook {
                 String name = resultSet.getString("name");
                 String subject = resultSet.getString("subject");
                 String publisher = resultSet.getString("publisher");
-                Date publicationDate = resultSet.getDate("publicationDate");
+                Format format = resultSet.getformat("format");
                 Language lang = Language.valueOf(resultSet.getString("language"));
                 String isbn = resultSet.getString("isbn");
-                Book book = new Book(name, subject, publisher, publicationDate, lang, 245);
+                Book book = new Book(name, subject, publisher, format, lang, 245);
                 books.add(book);
             }
         } catch (SQLException e) {
@@ -82,10 +83,10 @@ public class BookDAO implements IBook {
                 while (resultSet.next()) {
                     String subject = resultSet.getString("subject");
                     String publisher = resultSet.getString("publisher");
-                    Date publicationDate = resultSet.getDate("publicationDate");
+                    Format format = resultSet.getformat(format);
                     Language lang = Language.valueOf(resultSet.getString("language"));
                     double isbn = resultSet.getDouble("isbn");
-                    Book book = new Book(name, subject, publisher, publicationDate, lang, 865);
+                    Book book = new Book(name, subject, publisher, format, lang, 865);
                     books.add(book);
                 }
             }

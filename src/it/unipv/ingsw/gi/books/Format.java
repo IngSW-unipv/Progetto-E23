@@ -7,6 +7,7 @@ public enum Format {
 	Audiobook,
 	Audio_CD,
 	MP3_cd,
-	pdf,
+	pdf,;
+
 	
 }

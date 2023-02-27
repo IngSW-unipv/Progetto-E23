@@ -11,7 +11,7 @@ import it.unipv.ingsw.gi.books.*;
 public interface manage {
 	
 	
-	// metodi relativi agli aggiornamenti dei libri User 
+	// metodi relativi agli aggiornamenti degli  User 
 	
 	public ArrayList<User> selectAll();
 	
