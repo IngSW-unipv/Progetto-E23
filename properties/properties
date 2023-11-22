@@ -1,0 +1,8 @@
+DBDRIVER = "com.mysql.jdbc.Driver"
+DBURL = "jdbc:mysql://localhost:3306/bibfin";
+db_usn=root
+db_psw=ED^ME^69wlpXOK
+
+
+
+
