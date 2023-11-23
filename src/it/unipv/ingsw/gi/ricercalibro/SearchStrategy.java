@@ -8,6 +8,6 @@ import it.unipv.ingsw.gi.books.Libro;
 public interface SearchStrategy<T> {
 	
 	
-	public List<Libro> ricerca(List<Libro> catalogo, T criterioRicerca);
+	public List<Libro> ricerca(ArrayList<Libro> catalogo, T criterioRicerca);
 
 }

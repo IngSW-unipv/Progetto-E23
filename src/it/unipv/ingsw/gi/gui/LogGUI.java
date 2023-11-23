@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+import it.unipv.ingsw.gi.admingui.AdminGUI;
 import it.unipv.ingsw.gi.books.Lang;
 import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.dao.AdminDAO;
@@ -61,40 +62,34 @@ public class LogGUI extends JFrame{
 	 * Create the application.
 	 */
 	public LogGUI() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmLogin = new JFrame();
-		frmLogin.setTitle("Login");
-		frmLogin.setBounds(100, 100, 450, 300);
-		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmLogin.getContentPane().setLayout(null);
+	
+		new JFrame();
+		setTitle("Login");
+		setBounds(100, 100, 450, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		getContentPane().setLayout(null);
 
 		JLabel UserID = new JLabel("UserID");
 		UserID.setBounds(27, 31, 108, 27);
-		frmLogin.getContentPane().add(UserID);
+		getContentPane().add(UserID);
 
 		JLabel lblNewLabel_1 = new JLabel("Password");
 		lblNewLabel_1.setBounds(27, 69, 108, 27);
-		frmLogin.getContentPane().add(lblNewLabel_1);
+		getContentPane().add(lblNewLabel_1);
 
 		userIdTextField = new JTextField();
 		userIdTextField.setBounds(136, 34, 148, 20);
-		frmLogin.getContentPane().add(userIdTextField);
+		getContentPane().add(userIdTextField);
 		userIdTextField.setColumns(10);
 
 		JRadioButton patronRadioButton = new JRadioButton("Patrono");
 		patronRadioButton.setSelected(true);
 		patronRadioButton.setBounds(26, 136, 109, 23);
-		frmLogin.getContentPane().add(patronRadioButton);
+		getContentPane().add(patronRadioButton);
 
 		JRadioButton adminRadioButton = new JRadioButton("Admin");
 		adminRadioButton.setBounds(136, 136, 109, 23);
-		frmLogin.getContentPane().add(adminRadioButton);
+		getContentPane().add(adminRadioButton);
 
 
 		ButtonGroup logbuttonGroup = new ButtonGroup();
@@ -102,15 +97,11 @@ public class LogGUI extends JFrame{
 		logbuttonGroup.add(adminRadioButton);
 
 
-
-
-
-
 		JComboBox<Biblioteca> bibComboBox = new JComboBox<Biblioteca>();
 
 
 		bibComboBox.setBounds(108, 208, 119, 22);
-		frmLogin.getContentPane().add(bibComboBox);
+		getContentPane().add(bibComboBox);
 
 
 		PatronoDAO pat= new PatronoDAO();
@@ -144,6 +135,7 @@ public class LogGUI extends JFrame{
 				bib1
 
 		}; 
+		
 
 		DefaultComboBoxModel<Biblioteca> model = new DefaultComboBoxModel<Biblioteca>();
 		model.addElement(bib1);
@@ -152,8 +144,6 @@ public class LogGUI extends JFrame{
 		bibComboBox = new JComboBox<Biblioteca>(bibOptions);
 
 		Biblioteca bibselect =(Biblioteca) bibComboBox.getSelectedItem() ;
-
-
 
 
 
@@ -167,8 +157,6 @@ public class LogGUI extends JFrame{
 				String userType = bibselect.authenticate(username, new String(password));
 				
 				
-				
-				
 				Patrono selectedPatrono = null ;
 				for (Patrono patrono : bibselect.patrons) {
 					if (patrono.getPatronID() == username) {
@@ -176,10 +164,8 @@ public class LogGUI extends JFrame{
 						break; 
 					}
 				}
-				
-				
-				
 
+				
 				Admin selectedAdmin = null;
 				for(Admin admin : bibselect.admins) {
 					if(admin.getAdminID() == username) {
@@ -218,17 +204,17 @@ public class LogGUI extends JFrame{
 
 
 		btnNewButton.setBounds(292, 136, 108, 40);
-		frmLogin.getContentPane().add(btnNewButton);
+		getContentPane().add(btnNewButton);
 
 		JLabel lblNewLabel_2 = new JLabel("Biblioteca");
 		lblNewLabel_2.setBounds(27, 212, 71, 14);
-		frmLogin.getContentPane().add(lblNewLabel_2);
+		getContentPane().add(lblNewLabel_2);
 
 
 
 		passwordField = new JPasswordField();
 		passwordField.setBounds(136, 72, 148, 20);
-		frmLogin.getContentPane().add(passwordField);
+		getContentPane().add(passwordField);
 	}
 
 

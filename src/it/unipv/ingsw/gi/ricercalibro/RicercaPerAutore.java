@@ -11,7 +11,7 @@ import it.unipv.ingsw.gi.books.Libro;
 public class RicercaPerAutore implements SearchStrategy<String>{
 
 	@Override
-	public ArrayList<Libro> ricerca(List<Libro> catalogo, String autore) {
+	public ArrayList<Libro> ricerca(ArrayList<Libro> catalogo, String autore) {
 		
 		 ArrayList<Libro> risultati = new ArrayList<>();
 		

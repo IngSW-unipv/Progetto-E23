@@ -1,26 +1,21 @@
-package it.unipv.ingsw.gi.gui;
+package it.unipv.ingsw.gi.admingui;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.library.PrendeInPrestito;
 import it.unipv.ingsw.gi.ricercalibro.RicercaperID;
 import it.unipv.ingsw.gi.users.Admin;
-import it.unipv.ingsw.gi.users.Patrono;
 
-import javax.swing.JList;
-import javax.swing.JOptionPane;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-
-public class RestitLibGUI extends JFrame{
+public class CancellaLibroGUI extends JFrame{
+	
 	protected Biblioteca recvedbib;
 	private JFrame frame;
 	private JTextField booksearchfield;
@@ -33,7 +28,7 @@ public class RestitLibGUI extends JFrame{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RestitLibGUI window = new RestitLibGUI(null,null);
+					CancellaLibroGUI window = new CancellaLibroGUI(null,null);
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -45,12 +40,12 @@ public class RestitLibGUI extends JFrame{
 	/**
 	 * Create the application.
 	 */
-	public RestitLibGUI(Biblioteca biblioteca,Admin recvAdmin) {
+	public CancellaLibroGUI(Biblioteca biblioteca,Admin recvAdmin) {
 		this.recvedbib = biblioteca;
 		this.recvedadm = recvAdmin;
 		
 		
-		setTitle("Restituire Libro");
+		setTitle("Cancella Libro");
 		getContentPane().setLayout(null);
 		
 		booksearchfield = new JTextField();
@@ -58,40 +53,33 @@ public class RestitLibGUI extends JFrame{
 		getContentPane().add(booksearchfield);
 		booksearchfield.setColumns(10);
 		
-		JList bookresultslist = new JList();
+		JList<Libro> bookresultslist = new JList<Libro>();
 		bookresultslist.setBounds(10, 47, 292, 105);
 		getContentPane().add(bookresultslist);
 		
 		
-		ArrayList<PrendeInPrestito> resultList = new ArrayList<>();
-		DefaultListModel<PrendeInPrestito> listModel = new DefaultListModel<PrendeInPrestito>();
+		ArrayList<Libro> resultList = new ArrayList<>();
+		DefaultListModel<Libro> listModel = new DefaultListModel<Libro>();
 		bookresultslist.setModel(listModel);
 
-		for (PrendeInPrestito item : resultList) {
-			listModel.addElement(item);
-		}
-		
-		
-		
-		
 		
 		
 		
 		JButton patsearchbutton = new JButton("cerca");
 		patsearchbutton.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 				RicercaperID rpd = new RicercaperID();
-				ArrayList<PrendeInPrestito> list = new ArrayList<>();
-				for(PrendeInPrestito p : recvedbib.listPrestiti) {
+				ArrayList<Libro> list = new ArrayList<>();
+				for(Libro p : recvedbib.books) {
 					list.add(p);
 				}
-				rpd.ricerca(list, Integer.parseInt(booksearchfield.getText()));
+			 list = rpd.ricerca2(list, Integer.parseInt(booksearchfield.getText()));
 				
-				for (PrendeInPrestito item : list) {
-					listModel.addElement(item);
-				}
-				
-			}
+			 for(Libro lib : list) {
+				listModel.addElement(lib);
+			}}
 		});
 		
 		patsearchbutton.setBounds(312, 10, 89, 23);
@@ -109,23 +97,14 @@ public class RestitLibGUI extends JFrame{
 		JButton btnNewButton_3 = new JButton("Conferma");
 		btnNewButton_3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Patrono selectedpat = null;
-				PrendeInPrestito selectedpren = null;
-				selectedpren =(PrendeInPrestito) bookresultslist.getSelectedValue();
-				selectedpat = selectedpren.getUtente();
-				for (PrendeInPrestito myObject : recvedbib.listPrestiti) {
-		            if (myObject.getUtente() == bookresultslist.getSelectedValue() ) {
-		                selectedpat = myObject.getUtente();
-		                break; // Exit the loop once the desired object is found
-		            }
-		        }
+				
 				try {
-					recvAdmin.returnbook( (PrendeInPrestito) bookresultslist.getSelectedValue(), biblioteca, selectedpat);
-					JOptionPane.showMessageDialog(RestitLibGUI.this, "book returned!");
+					recvAdmin.canLibro((Libro) bookresultslist.getSelectedValue(), biblioteca);
 				} catch (Exception e1) {
-					
+					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+		
 			}
 		});
 		btnNewButton_3.setBounds(335, 208, 89, 23);
@@ -141,4 +120,5 @@ public class RestitLibGUI extends JFrame{
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
 }

@@ -11,7 +11,7 @@ public class RicercaPerTitolo implements SearchStrategy<String>{
 	
 	 
 	 @Override
-	    public ArrayList<Libro> ricerca(List<Libro> catalogo, String titolo) {
+	    public ArrayList<Libro> ricerca(ArrayList<Libro> catalogo, String titolo) {
 	    	 ArrayList<Libro> risultati = new ArrayList<>();
 
 	         for (Libro libro : catalogo) {
@@ -19,9 +19,12 @@ public class RicercaPerTitolo implements SearchStrategy<String>{
 	             // La ricerca può essere case-insensitive quindi posso ottenere il libro che voglio qualunque sia 
 	        	 // ma maniera che scrivo (maiuscoo, minuscolo, mescolando, ecc..)
 	             if (libro.getTitle().toLowerCase().contains(titolo.toLowerCase())) {
+	            	 
+	            	
 	                 risultati.add(libro);
 	                 System.out.println(risultati);
-	                 
+	            	 
+	            	 
 	             }
 	         }
 			return risultati;

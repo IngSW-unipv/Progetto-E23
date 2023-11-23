@@ -1,4 +1,4 @@
-package it.unipv.ingsw.gi.gui;
+package it.unipv.ingsw.gi.admingui;
 
 import java.awt.EventQueue;
 

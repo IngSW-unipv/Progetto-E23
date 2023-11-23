@@ -1,4 +1,4 @@
-package it.unipv.ingsw.gi.gui;
+package it.unipv.ingsw.gi.admingui;
 
 import java.awt.EventQueue;
 
@@ -12,10 +12,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AdminGUI extends JFrame{
-
+	
 	private JFrame frame;
 	protected Admin recvedadm;
-	protected Biblioteca recvedbib;
+	private Biblioteca recvedbib;
 	/**
 	 * Launch the application.
 	 */
@@ -45,25 +45,39 @@ public class AdminGUI extends JFrame{
 		JButton prenINPres = new JButton("Prendi In Prestito");
 		prenINPres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AdminpipGui apip = new  AdminpipGui(bibselect, recevadm);
+				apip.setSize(500,400);
+				apip.setVisible(true);
 			}
 		});
-		prenINPres.setBounds(10, 46, 115, 23);
+		prenINPres.setBounds(10, 46, 163, 35);
 		getContentPane().add(prenINPres);
 
 		JButton Aquista = new JButton("Aquista");
-		Aquista.setBounds(10, 83, 115, 23);
+		Aquista.setBounds(10, 102, 163, 35);
 		getContentPane().add(Aquista);
 
 		JButton AddElement = new JButton("Agguingi");
-		AddElement.setBounds(10, 117, 115, 23);
+		AddElement.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AggGUI agg = new AggGUI(bibselect,recevadm);
+				
+				agg.setSize(500,400);
+				agg.setVisible(true);
+			}
+		});
+		AddElement.setBounds(261, 102, 163, 35);
 		getContentPane().add(AddElement);
 
 		JButton deleteElement = new JButton("Cancella");
 		deleteElement.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CancGUI cg = new CancGUI(recvedbib,recvedadm);
+				cg.setSize(500,400);
+				cg.setVisible(true);
 			}
 		});
-		deleteElement.setBounds(10, 151, 115, 23);
+		deleteElement.setBounds(10, 163, 163, 35);
 		getContentPane().add(deleteElement);
 
 		JButton stateMod = new JButton("Cambia Stato");
@@ -75,7 +89,7 @@ public class AdminGUI extends JFrame{
 				
 			}
 		});
-		stateMod.setBounds(10, 185, 115, 23);
+		stateMod.setBounds(261, 163, 163, 35);
 		getContentPane().add(stateMod);
 
 		JButton btnNewButton = new JButton("Restituire Libro");
@@ -88,7 +102,7 @@ public class AdminGUI extends JFrame{
 
 			}
 		});
-		btnNewButton.setBounds(135, 46, 130, 23);
+		btnNewButton.setBounds(261, 46, 163, 35);
 		getContentPane().add(btnNewButton);
 		initialize();
 	}

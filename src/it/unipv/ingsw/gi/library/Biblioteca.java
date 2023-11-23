@@ -1,12 +1,12 @@
 package it.unipv.ingsw.gi.library;
 
 
+import java.awt.EventQueue;
 import java.io.Serializable;
 import java.util.ArrayList;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.books.Libro;
-
-
+import it.unipv.ingsw.gi.gui.LogGUI;
 import it.unipv.ingsw.gi.users.Patrono;
 
 
@@ -17,6 +17,7 @@ public class Biblioteca implements Serializable {
 	public ArrayList<Patrono> patrons;
 	public ArrayList<Admin> admins;
 	public ArrayList<Libro> books;
+	
 
 
 
@@ -32,14 +33,9 @@ public class Biblioteca implements Serializable {
 	}
 
 
-
-
-
 	public String toString() {
 		return this.name;
 	}
-
-
 
 
 
@@ -60,8 +56,6 @@ public class Biblioteca implements Serializable {
 	}
 
 
-
-
 	public String getName() {
 		return name;
 	}
@@ -79,16 +73,62 @@ public class Biblioteca implements Serializable {
 
 		return;
 	}
+	
+	
+	public void canBook(Libro libro) {
+		if (books.contains(libro)) {
+			books.remove(libro);
+			System.out.println("book removed succefully!");
+			
+		}
+		else {
+			System.out.println("book doesn't exist");
+		}
+	}
+	
+	
+	public void addPatrono(Patrono patrono) {
+		if (!(patrons.contains(patrono))) {
+			patrons.add(patrono);
+			System.out.println("patrono aggiunto con successo");
+			
+		}
+		else 
+			System.out.println("patrono già presente in biblioteca");
 
+		return;
+	}
+	
+	
+	public void canPat(Patrono patrono) {
+		if(patrons.contains(patrono)) {
+			patrons.remove(patrono);
+			System.out.println("patron removed succefully!");
+		}
+		else {
+			System.out.println("patron doesn't exist");
+		}
+	}
 
 
 	public static void main(String[] args) {
-
-
-
-
+		
+		
+		
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					LogGUI window = new LogGUI();
+					window.setVisible(true);
+				 } catch (Exception e) {
+				 	e.printStackTrace();
+				}
+			}
+		});
+		
 
 	}
 
+	
 
 }

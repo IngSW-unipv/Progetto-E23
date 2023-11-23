@@ -1,5 +1,6 @@
 package it.unipv.ingsw.gi.users;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.dao.AdminDAO;
@@ -13,6 +14,11 @@ import it.unipv.ingsw.gi.service.BibServices;
 
 public class Admin extends Persona implements Manage {
 
+	PatronoDAO p1 = new PatronoDAO();
+	BibDAO bd = new BibDAO();
+	AdminDAO ad = new AdminDAO();
+	BibServices bs = new BibServices(p1, bd,ad);
+	
 	public Admin(int userID, String userPASS, String name) {
 		super(userID, userPASS, name);
 
@@ -20,8 +26,37 @@ public class Admin extends Persona implements Manage {
 
 	
 	@Override
-	public void borrowbook(Libro book, LocalDate date, Patrono patron, Biblioteca library) {
-		
+	public void borrowbook(Libro book, LocalDate date, Patrono patron, Biblioteca library) throws Exception{
+		if (book.isAvailable == true) {
+			if (patron.state == Stato.active) {
+				if (patron.borrowedBooks.size() < 5) {
+					date = LocalDate.now().plus(30, ChronoUnit.DAYS);
+					patron.borrowedBooks.add(book);
+					PrendeInPrestito borrowedItem = new PrendeInPrestito(patron,book,date,library);
+					library.listPrestiti.add(borrowedItem);
+					book.setIsAvailable(false);
+					PatronoDAO pd = new PatronoDAO();
+					BibDAO pr = new BibDAO();
+					AdminDAO ad = new AdminDAO();
+					BibServices bs = new BibServices(pd,pr,ad);
+					bs.servBorrowBook(book, date, patron, library);
+					System.out.println("book borrowed succefully");
+					System.out.println(library.listPrestiti);
+					System.out.println(patron.borrowedBooks);
+					
+				}
+				else {
+					System.out.println("max number of books allowed already reached please return some books before trying again");
+					
+				}}
+			else {
+				System.out.println("account state not active refear to the admin for help");
+				
+			}}
+		else {
+
+			System.out.println("book is not available");
+		}
 		
 	}
 	
@@ -29,10 +64,35 @@ public class Admin extends Persona implements Manage {
 	@Override
 	public void aggLibro(Libro libro,Biblioteca biblio) throws Exception{
 		biblio.addBook(libro);
-		AdminDAO a = new AdminDAO();
-		a.agguingiLibro(libro);
+		bs.serAggLib(libro, biblio);
 		
 	}
+	
+	@Override
+	public void canLibro(Libro libro,Biblioteca bib) throws Exception{
+		bib.canBook(libro);
+		bs.serDelLibro(libro, bib);
+		
+	}
+	
+	
+	@Override
+	public void aggPatrono(Patrono patrono, Biblioteca bib) throws Exception {
+		bib.addPatrono(patrono);
+		bs.serAggPat(patrono, bib);
+		
+	}
+	
+	@Override
+	public void canPatrono(Patrono patrono,Biblioteca bib) throws Exception{
+		bib.canPat(patrono);
+		bs.serDelPat(patrono, bib);
+	}
+	
+	
+	
+	
+	
 	
 	
 	@Override
@@ -43,10 +103,6 @@ public class Admin extends Persona implements Manage {
 			if (LocalDate.now().isBefore(bitem.getDate())) {
 				patron.borrowedBooks.remove(bitem.libro);
 				bitem.libro.setIsAvailable(true);
-				PatronoDAO p1 = new PatronoDAO();
-				BibDAO bd = new BibDAO();
-				AdminDAO ad = new AdminDAO();
-				BibServices bs = new BibServices(p1, bd,ad);
 				bs.serRisBook(bitem.libro, library, patron);
 				bitem.libro.setIsAvailable(true);
 				PrendeInPrestito borrowedItem = new PrendeInPrestito(patron,bitem.libro, null, library);
@@ -59,10 +115,6 @@ public class Admin extends Persona implements Manage {
 				System.out.println("book returned after allowed loan period and patron state renderded frozen , refer to admins for help");
 				patron.borrowedBooks.remove(bitem.libro);
 				bitem.libro.setIsAvailable(true);
-				PatronoDAO p1 = new PatronoDAO();
-				BibDAO bd = new BibDAO();
-				AdminDAO ad = new AdminDAO();
-				BibServices bs = new BibServices(p1, bd,ad);
 				ad.cambioStatoDAO(patron, Stato.frozen);
 				bs.serRisBook(bitem.libro, library, patron);
 				bitem.libro.setIsAvailable(true);
@@ -132,11 +184,17 @@ public class Admin extends Persona implements Manage {
 		 p.cancellaPrenotazione(this, numeroPosto);
 		 
 	 }
-	
-	
-	
-	
-	
+
+
 	
 
+
+	@Override
+	public void tolLibro(Libro libro, Biblioteca bib) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	
 }
