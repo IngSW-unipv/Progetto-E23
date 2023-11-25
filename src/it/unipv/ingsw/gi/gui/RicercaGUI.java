@@ -74,6 +74,7 @@ public class RicercaGUI extends JFrame{
 		JButton btnNewButton_2 = new JButton("cerca");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				listModel.clear();
 				String searchT = (String) searchStrat.getSelectedItem();
 				String searchInput = searchbar.getText();
 
