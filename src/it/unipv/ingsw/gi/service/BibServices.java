@@ -66,6 +66,6 @@ public class BibServices {
 	public void serDelPat(Patrono patrono, Biblioteca biblioteca) throws Exception{
 		admdao.cancellapatron(patrono, biblioteca);
 	}
-	
-	
+
+
 }

@@ -1,6 +1,5 @@
 package it.unipv.ingsw.gi.admingui;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
@@ -12,25 +11,15 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AggGUI extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Biblioteca recvdbib;
 	private Admin recvdadmn;
-	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AggGUI window = new AggGUI(null,null);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
+
 
 	/**
 	 * Create the application.
@@ -38,21 +27,27 @@ public class AggGUI extends JFrame{
 	public AggGUI(Biblioteca recdbib,Admin recdAdmin) {
 		this.recvdadmn= recdAdmin;
 		this.recvdbib=recdbib;
+
+		//absolute
 		getContentPane().setLayout(null);
-		
+
+
+		//button to open the add book function
 		JButton aggLibButton = new JButton("Agguingi Libro");
 		aggLibButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				AgguingiLibroGUI al = new AgguingiLibroGUI(recvdbib,recvdadmn);
 				al.setSize(500,400);
 				al.setVisible(true);
-				
+
 			}
 		});
 		aggLibButton.setBounds(30, 95, 140, 55);
 		getContentPane().add(aggLibButton);
-		
+
+
+		//button to open the add patron function
 		JButton aggPatButton = new JButton("Agguingi Patrono");
 		aggPatButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -63,15 +58,8 @@ public class AggGUI extends JFrame{
 		});
 		aggPatButton.setBounds(242, 95, 140, 55);
 		getContentPane().add(aggPatButton);
-		initialize();
+
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+
 }

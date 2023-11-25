@@ -8,7 +8,7 @@ import java.util.TimerTask;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
 
-public class PrenotazionePostoStudio {
+public class PrenotaPosti {
 
 	//private int numeroPosto;
 		//private int durataPrenotazione;
@@ -30,7 +30,7 @@ public class PrenotazionePostoStudio {
 		private Map<Admin , Integer> prenotazioniAdmin = new HashMap<>();
 		
 		//costruttore della classe
-		public PrenotazionePostoStudio(int numPosti) {
+		public PrenotaPosti(int numPosti) {
 			for (int i = 1; i<= numPosti; i++) {
 				postiStudio.put(i, new  PostoStudio());
 				

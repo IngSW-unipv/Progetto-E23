@@ -1,15 +1,11 @@
 package it.unipv.ingsw.gi.tests;
-import it.unipv.ingsw.gi.users.Persona;
-import it.unipv.ingsw.gi.users.Stato;
 
+import it.unipv.ingsw.gi.users.Stato;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
 import it.unipv.ingsw.gi.books.Lang;
 import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.dbase.MyDbaseconnect;
@@ -49,11 +45,12 @@ public class Randomtests {
 		ArrayList<Admin> admins = new ArrayList<>();
 		ArrayList<PrendeInPrestito> books = new ArrayList<>();
 		ArrayList<Libro> avaiBooks = new ArrayList<>();
-		Biblioteca bib1 = new Biblioteca (books, "bib1", patrons, admins,avaiBooks);
+		Biblioteca bib1 = new Biblioteca(books, null, patrons, admins, avaiBooks);
 		Patrono pat1 = new Patrono(1234,"pass", "jack", avaiBooks, Stato.active,0.0);
 		
 		Libro lib1 = new Libro(123, "potere", "swagger", true, Lang.English, 22.2);
-		
+		bib1.books.add(lib1);
+		bib1.patrons.add(pat1);
 		
 		
 		
@@ -152,10 +149,10 @@ public class Randomtests {
 		 System.out.println(bib1.patrons);
 	*/
 		
+		MyDbaseconnect dbConnect = MyDbaseconnect.getInstance();
 		
 		
-		
-		try (Connection conn = MyDbaseconnect.getConnection();
+		try (Connection conn = dbConnect.getConnection();
 	            Statement libstatement = conn.prepareStatement("SELECT * from bibfin.admins");
 
 	            ResultSet resultSet = libstatement.executeQuery("SELECT * from bibfin.admins")) {

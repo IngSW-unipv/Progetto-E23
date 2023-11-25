@@ -1,4 +1,6 @@
 package it.unipv.ingsw.gi.users;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -8,11 +10,11 @@ import it.unipv.ingsw.gi.dao.BibDAO;
 import it.unipv.ingsw.gi.dao.PatronoDAO;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.library.PrendeInPrestito;
-import it.unipv.ingsw.gi.posti.PrenotazionePostoStudio;
+import it.unipv.ingsw.gi.posti.PrenotaPosti;
 import it.unipv.ingsw.gi.service.BibServices;
 
 
-public class Admin extends Persona implements Manage {
+public class Admin extends Persona implements Manage ,PropertyChangeListener{
 
 	PatronoDAO p1 = new PatronoDAO();
 	BibDAO bd = new BibDAO();
@@ -88,10 +90,6 @@ public class Admin extends Persona implements Manage {
 		bib.canPat(patrono);
 		bs.serDelPat(patrono, bib);
 	}
-	
-	
-	
-	
 	
 	
 	
@@ -175,12 +173,12 @@ public class Admin extends Persona implements Manage {
 	
 	
 	public void visualizzaPostiDisponibili() {
-		PrenotazionePostoStudio p = new PrenotazionePostoStudio(userID);
+		PrenotaPosti p = new PrenotaPosti(userID);
 		 p.visualizzaPostiDisponibili();
 	 }
 	 
 	 public void cancellaPrenotazione(int numeroPosto) {
-		 PrenotazionePostoStudio p = new PrenotazionePostoStudio(userID);
+		 PrenotaPosti p = new PrenotaPosti(userID);
 		 p.cancellaPrenotazione(this, numeroPosto);
 		 
 	 }
@@ -194,6 +192,19 @@ public class Admin extends Persona implements Manage {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		// TODO Auto-generated method stub
+		String propertyName = evt.getPropertyName();
+        String bookName = ((Libro) evt.getSource()).getTitle();
+        boolean isAvailable = (boolean) evt.getNewValue();
+        System.out.println(name + " received update: " + bookName + "'s " + propertyName + " changed to " + isAvailable);
+		
+	}
+	
+	
 	
 	
 	

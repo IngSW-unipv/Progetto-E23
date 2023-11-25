@@ -1,32 +1,27 @@
 package it.unipv.ingsw.gi.ricercalibro;
 
 import java.util.ArrayList;
-
-import java.util.List;
-import java.util.Scanner;
-
-import it.unipv.ingsw.gi.books.Lang;
 import it.unipv.ingsw.gi.books.Libro;
 
 public class RicercaPerAutore implements SearchStrategy<String>{
 
 	@Override
 	public ArrayList<Libro> ricerca(ArrayList<Libro> catalogo, String autore) {
-		
-		 ArrayList<Libro> risultati = new ArrayList<>();
-		
-		
 
-	        for (Libro libro : catalogo) {
-	        	
-	            // La ricerca può essere case-insensitive
-	            if (libro.getAuthor().toLowerCase().contains(autore.toLowerCase()) ) {
-	                risultati.add(libro);
-	            }
-	        }
-			return risultati;
-	 
-            } 
+		ArrayList<Libro> risultati = new ArrayList<>();
+
+
+
+		for (Libro libro : catalogo) {
+
+			// La ricerca può essere case-insensitive
+			if (libro.getAuthor().toLowerCase().contains(autore.toLowerCase()) ) {
+				risultati.add(libro);
+			}
+		}
+		return risultati;
+
+	} 
 
 }
 

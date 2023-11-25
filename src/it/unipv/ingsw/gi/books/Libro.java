@@ -1,5 +1,9 @@
 package it.unipv.ingsw.gi.books;
 
+
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 public class Libro {
 	public int bookID;
 	public String title;
@@ -7,10 +11,11 @@ public class Libro {
 	public Boolean isAvailable;
 	public Lang language;
 	public double prezzo;
-	
-	
-	
-	
+	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+
+
+
+
 	public Libro(int bookID, String title, String author, Boolean isAvailable, Lang language, double prezzo) {
 		super();
 		this.bookID = bookID;
@@ -23,15 +28,19 @@ public class Libro {
 
 
 	@Override
-    public String toString() {
-        return "Title: " + title + ", Author: " + author + "is available :" + isAvailable;
-    }
+	public String toString() {
+		return "Title: " + title + ", Author: " + author + "is available :" + isAvailable;
+	}
 
 
 	public int getBookID() {
 		return bookID;
 	}
 
+
+	public boolean isAvailable() {
+		return isAvailable;
+	}
 
 	public void setBookID(int bookID) {
 		this.bookID = bookID;
@@ -42,7 +51,7 @@ public class Libro {
 		return title;
 	}
 
-	
+
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -65,11 +74,16 @@ public class Libro {
 
 
 	public void setIsAvailable(Boolean isAvailable) {
+		Boolean oldavai = this.isAvailable;
 		this.isAvailable = isAvailable;
+		propertyChangeSupport.firePropertyChange("isAvailable", oldavai, isAvailable);
+
 	}
 
 
-	private double getPrezzo() {
+
+
+	public double getPrezzo() {
 		return prezzo;
 	}
 
@@ -87,10 +101,16 @@ public class Libro {
 	public void setLanguage(Lang language) {
 		this.language = language;
 	}
-	
-	
-	
-	
-	
+
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		propertyChangeSupport.addPropertyChangeListener(listener);
+	}
+
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		propertyChangeSupport.removePropertyChangeListener(listener);
+	}
+
+
+
 
 }

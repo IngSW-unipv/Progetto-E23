@@ -2,7 +2,7 @@ package it.unipv.ingsw.gi.library;
 import it.unipv.ingsw.gi.users.Patrono;
 import it.unipv.ingsw.gi.books.Libro;
 import java.time.LocalDate;
-import it.unipv.ingsw.gi.library.Biblioteca;
+
 
 public class PrendeInPrestito {
 
@@ -17,7 +17,7 @@ public class PrendeInPrestito {
 		super();
 		this.utente = utente;
 		this.libro = libro;
-		this.date = date;
+		PrendeInPrestito.date = date;
 		this.biblioteca = biblioteca;
 	}
 	
@@ -36,13 +36,11 @@ public class PrendeInPrestito {
 	
 
 	public Patrono getUtente() {
-		return utente;
+		return this.utente;
 	}
 
 
-	private void setUtente(Patrono utente) {
-		this.utente = utente;
-	}
+	
 
 
 	public Libro getLibro() {

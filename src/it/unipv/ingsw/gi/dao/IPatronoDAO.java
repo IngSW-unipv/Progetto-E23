@@ -8,10 +8,10 @@ import it.unipv.ingsw.gi.users.Patrono;
 
 public interface IPatronoDAO {
 
-	
+
 	public void borrowBookDao(Libro book,LocalDate date,Patrono patron,Biblioteca library) throws Exception;
-	
-	
-	
-	
+
+
+
+
 }

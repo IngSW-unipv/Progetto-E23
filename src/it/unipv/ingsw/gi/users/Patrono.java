@@ -1,29 +1,33 @@
 package it.unipv.ingsw.gi.users;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
-import com.mysql.cj.jdbc.exceptions.MySQLQueryInterruptedException;
-
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.library.PrendeInPrestito;
-import it.unipv.ingsw.gi.posti.PrenotazionePostoStudio;
+import it.unipv.ingsw.gi.posti.PrenotaPosti;
 import it.unipv.ingsw.gi.service.BibServices;
 import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.dao.AdminDAO;
 import it.unipv.ingsw.gi.dao.BibDAO;
 import it.unipv.ingsw.gi.dao.PatronoDAO;
 
-public class Patrono extends Persona implements Functions , Serializable{
+public class Patrono extends Persona implements Functions , Serializable , PropertyChangeListener{
 
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public ArrayList<Libro> borrowedBooks;
 	public Stato state;
 	public double saldo;
 	public ArrayList<Libro> carello;
-	private PrenotazionePostoStudio prenotaPostoStudio;
+	private PrenotaPosti prenotaPostoStudio;
+	
 	
 
 	public Patrono(int userID, String userPASS, String name, ArrayList<Libro> borrowedBooks, 
@@ -109,9 +113,6 @@ public class Patrono extends Persona implements Functions , Serializable{
 	}
 
 
-	private ArrayList<Libro> getBorrowedBooks() {
-		return borrowedBooks;
-	}
 
 
 	public void setBorrowedBooks(ArrayList<Libro> borrowedBooks) {
@@ -135,10 +136,6 @@ public class Patrono extends Persona implements Functions , Serializable{
 	}
 	
 
-
-	private Stato getState() {
-		return state;
-	}
 
 
 
@@ -164,6 +161,19 @@ public class Patrono extends Persona implements Functions , Serializable{
 	public void prenotaPosto(int numeroPosto, int durataPrenotazione) {
 		
 		prenotaPostoStudio.prenotaPosto(this, numeroPosto, durataPrenotazione);
+		
+	}
+
+
+
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		// TODO Auto-generated method stub
+		String propertyName = evt.getPropertyName();
+        String bookName = ((Libro) evt.getSource()).getTitle();
+        boolean isAvailable = (boolean) evt.getNewValue();
+        System.out.println(name + " received update: " + bookName + "'s " + propertyName + " changed to " + isAvailable);
 		
 	}
 	

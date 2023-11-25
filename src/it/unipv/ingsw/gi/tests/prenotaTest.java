@@ -1,6 +1,6 @@
 package it.unipv.ingsw.gi.tests;
 
-import it.unipv.ingsw.gi.posti.PrenotazionePostoStudio;
+import it.unipv.ingsw.gi.posti.PrenotaPosti;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
 
@@ -9,7 +9,7 @@ public class prenotaTest {
 	public static void main(String []args) {
 		
 		// creazione di un istanza di prenotazione con 10 posti studio
-					PrenotazionePostoStudio prenotazione = new PrenotazionePostoStudio(5);
+					PrenotaPosti prenotazione = new PrenotaPosti(5);
 					//prenotazione.visualizzaPostiDisponibili();
 					
 					Patrono p1 = new Patrono(0, "test", null, null, null, 0);

@@ -1,6 +1,6 @@
 package it.unipv.ingsw.gi.tests;
 
-import java.time.LocalDate;
+
 import java.util.ArrayList;
 
 import it.unipv.ingsw.gi.books.Lang;
@@ -23,8 +23,8 @@ public class Tests {
 		ArrayList<Admin> admin = new ArrayList<Admin>();
 		Patrono patrontest = new Patrono(1, "password", "john doe",borrowedBooks,  Stato.active,0.0);
 		ArrayList<Libro> books = new ArrayList<Libro>();
-		Biblioteca librarytest = new Biblioteca(borrowedBookList, "botta", patrons,admin,books);
-
+		Biblioteca librarytest = new Biblioteca(borrowedBookList, null, patrons, admin, books);
+		librarytest.books.add(booktest);
 		librarytest.patrons.add(patrontest);
 
 		//patrontest.borrowbook(booktest, LocalDate.now(), patrontest, librarytest);

@@ -12,12 +12,16 @@ import it.unipv.ingsw.gi.users.Patrono;
 
 public class Biblioteca implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public ArrayList<PrendeInPrestito> listPrestiti;
 	public String name;
 	public ArrayList<Patrono> patrons;
 	public ArrayList<Admin> admins;
 	public ArrayList<Libro> books;
-	
+
 
 
 
@@ -36,7 +40,6 @@ public class Biblioteca implements Serializable {
 	public String toString() {
 		return this.name;
 	}
-
 
 
 	public String authenticate(int usernameID, String password) {
@@ -66,40 +69,40 @@ public class Biblioteca implements Serializable {
 		if (!(books.contains(libro))) {
 			books.add(libro);
 			System.out.println("libro aggiunto con successo");
-			
+
 		}
 		else 
 			System.out.println("libro già presente in biblioteca");
 
 		return;
 	}
-	
-	
+
+
 	public void canBook(Libro libro) {
 		if (books.contains(libro)) {
 			books.remove(libro);
 			System.out.println("book removed succefully!");
-			
+
 		}
 		else {
 			System.out.println("book doesn't exist");
 		}
 	}
-	
-	
+
+
 	public void addPatrono(Patrono patrono) {
 		if (!(patrons.contains(patrono))) {
 			patrons.add(patrono);
 			System.out.println("patrono aggiunto con successo");
-			
+
 		}
 		else 
 			System.out.println("patrono già presente in biblioteca");
 
 		return;
 	}
-	
-	
+
+
 	public void canPat(Patrono patrono) {
 		if(patrons.contains(patrono)) {
 			patrons.remove(patrono);
@@ -112,23 +115,23 @@ public class Biblioteca implements Serializable {
 
 
 	public static void main(String[] args) {
-		
-		
-		
+
+
+
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					LogGUI window = new LogGUI();
 					window.setVisible(true);
-				 } catch (Exception e) {
-				 	e.printStackTrace();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		});
-		
+
 
 	}
 
-	
+
 
 }

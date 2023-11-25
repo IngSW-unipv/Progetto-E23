@@ -1,6 +1,5 @@
 package it.unipv.ingsw.gi.admingui;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
@@ -12,36 +11,30 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class AdminGUI extends JFrame{
-	
-	private JFrame frame;
-	protected Admin recvedadm;
-	private Biblioteca recvedbib;
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AdminGUI window = new AdminGUI(null,null);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
-	 * Create the application.
+	 * 
 	 */
+	private static final long serialVersionUID = 1L;
+
+
+	// variables passed from the previous window
+	protected Admin recvedadm;
+	private Biblioteca recvedbib;
+
+
+	//creating the app
 	public AdminGUI(Biblioteca bibselect,Admin recevadm) {
 		this.recvedadm = recevadm;
 		this.recvedbib = bibselect;
-		
+
+		// setting the title and setting the absolute layout
 		setTitle("Admin interface");
 		getContentPane().setLayout(null);
 
+
+
+		//button that opens the borrow function interface
 		JButton prenINPres = new JButton("Prendi In Prestito");
 		prenINPres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -53,15 +46,17 @@ public class AdminGUI extends JFrame{
 		prenINPres.setBounds(10, 46, 163, 35);
 		getContentPane().add(prenINPres);
 
+		//button that opens the buy interface
 		JButton Aquista = new JButton("Aquista");
 		Aquista.setBounds(10, 102, 163, 35);
 		getContentPane().add(Aquista);
 
+		//button that opens the add interface for the books and patrons
 		JButton AddElement = new JButton("Agguingi");
 		AddElement.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				AggGUI agg = new AggGUI(bibselect,recevadm);
-				
+
 				agg.setSize(500,400);
 				agg.setVisible(true);
 			}
@@ -69,6 +64,7 @@ public class AdminGUI extends JFrame{
 		AddElement.setBounds(261, 102, 163, 35);
 		getContentPane().add(AddElement);
 
+		//button that opens the delete interface for books and patrons
 		JButton deleteElement = new JButton("Cancella");
 		deleteElement.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,18 +76,20 @@ public class AdminGUI extends JFrame{
 		deleteElement.setBounds(10, 163, 163, 35);
 		getContentPane().add(deleteElement);
 
+		//button that opens the state modifier interface
 		JButton stateMod = new JButton("Cambia Stato");
 		stateMod.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CambiaStatoGUI cSGgui = new CambiaStatoGUI(bibselect,recevadm);
 				cSGgui.setVisible(true);
 				cSGgui.setSize(500, 400);
-				
+
 			}
 		});
 		stateMod.setBounds(261, 163, 163, 35);
 		getContentPane().add(stateMod);
 
+		//button that opens the return function interface
 		JButton btnNewButton = new JButton("Restituire Libro");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,15 +102,8 @@ public class AdminGUI extends JFrame{
 		});
 		btnNewButton.setBounds(261, 46, 163, 35);
 		getContentPane().add(btnNewButton);
-		initialize();
+
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+
 }

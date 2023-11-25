@@ -1,16 +1,11 @@
 package it.unipv.ingsw.gi.dbase;
 
-
-
 import java.io.FileInputStream;
 import java.sql.*;
 import java.util.Properties;
 
-
-
-
 public class MyDbaseconnect {
-	
+
 	private static final String PROPERTYDBDRIVER = "DBDRIVER";
 	private static final String PROPERTYDBURL = "DBURL";
 	private static final String PROPERTYNAME = "db_usn"; 
@@ -20,13 +15,14 @@ public class MyDbaseconnect {
 	private static String dbDriver;
 	private static String dbURL;
 	private static MyDbaseconnect instance;
-	
-	
+
+
 	private MyDbaseconnect() {
 		init();
 	}
-	
-	
+
+
+	//initialize
 	private static void init() {
 		Properties p = new Properties(System.getProperties());
 		try {
@@ -35,13 +31,14 @@ public class MyDbaseconnect {
 			password=p.getProperty(PROPERTYPSW);
 			dbDriver =p.getProperty(PROPERTYDBDRIVER);
 			dbURL =p.getProperty(PROPERTYDBURL);
-			
+
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+
+	//connection check
 	public static boolean isOpen(Connection conn)
 	{
 		if (conn == null)
@@ -50,6 +47,7 @@ public class MyDbaseconnect {
 			return true;
 	}
 
+	//close connection
 	public static Connection closeConnection(Connection conn)
 	{
 		if ( !isOpen(conn) )
@@ -67,25 +65,26 @@ public class MyDbaseconnect {
 		}
 		return conn;
 	}
-	
-	
+
+
+	//start connection
 	public static Connection startConnection(Connection conn, String schema)
 	{
 		init();
 		System.out.println(dbURL);
-	
-		
-		
+
+
+
 		if ( isOpen(conn) )
 			closeConnection(conn);
-	
+
 		try 
 		{
-			
+
 			dbURL=String.format(dbURL,schema); 
 			System.out.println(dbURL);
 			Class.forName(dbDriver);
-			
+
 			conn = DriverManager.getConnection(dbURL, username, password);// Apertura connessione
 
 		}
@@ -97,9 +96,9 @@ public class MyDbaseconnect {
 		}
 		return conn;
 	}
-	
 
-	public static Connection getConnection() {
+	//calling the connection
+	public Connection getConnection() {
 		Connection con=null;
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -108,9 +107,9 @@ public class MyDbaseconnect {
 		catch(Exception e) {System.out.println(e);}
 		return con;
 	}
-	
+
+	//calling the unique instance
 	public static MyDbaseconnect getInstance() {
-		
 
 		if (instance == null ) {
 			instance = new MyDbaseconnect();
@@ -118,28 +117,17 @@ public class MyDbaseconnect {
 		return instance;
 	}
 
-	
-	
-	
- 
 
-	
- public static void main(String[] args) {
-	try {
-		Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/bibfin", "root", "ED^ME^69wlpXOK");// Establishing
-																													// connection
-		System.out.println("Connected With the database successfully");
-	} catch (SQLException e) {	
-		System.out.println("Error while connecting to the database");
 
-	}
 
-}
 
-	
- 
- 
- 
+
+
+
+
+
+
+
 
 }
 

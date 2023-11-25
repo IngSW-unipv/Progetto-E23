@@ -1,61 +1,51 @@
 package it.unipv.ingsw.gi.admingui;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-
-import it.unipv.ingsw.gi.books.Lang;
 import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
 import it.unipv.ingsw.gi.users.Stato;
-
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JList;
-import javax.swing.AbstractListModel;
+import javax.swing.JOptionPane;
 import javax.swing.DefaultListModel;
-
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class AgguingiPatronoGUI extends JFrame{
+	/**
+	 * 
+	 */
+
+
+	//declaring the components
+	private static final long serialVersionUID = 1L;
 	private Biblioteca recvdbib;
 	private Admin recvdadmn;
-	private JFrame frame;
 	private JTextField userIDField;
 	private JTextField userPassField;
 	private JTextField usernameField;
 	private JTextField saldoField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AgguingiPatronoGUI window = new AgguingiPatronoGUI(null,null);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
 	 */
 	public AgguingiPatronoGUI(Biblioteca recvdbib,Admin recvdAdmn) {
+		this.recvdadmn = recvdAdmn;
+		this.recvdbib = recvdbib;
 		new JFrame();
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
+
+		// setting the characteristics of the components
 		userIDField = new JTextField();
 		userIDField.setBounds(10, 11, 193, 20);
 		getContentPane().add(userIDField);
@@ -76,6 +66,9 @@ public class AgguingiPatronoGUI extends JFrame{
 		saldoField.setBounds(10, 104, 193, 20);
 		getContentPane().add(saldoField);
 
+
+
+		// creating and defining the labels
 		JLabel lblNewLabel = new JLabel("userID");
 		lblNewLabel.setBounds(213, 14, 82, 14);
 		getContentPane().add(lblNewLabel);
@@ -98,35 +91,32 @@ public class AgguingiPatronoGUI extends JFrame{
 
 
 
+		// list to hold the possible states 
 		JList<Stato> stateList = new JList<Stato>();
-
 		ArrayList<Stato> stateListt= new ArrayList<>();
 		DefaultListModel<Stato> listModel = new DefaultListModel<Stato>();
 		stateList.setModel(listModel);
-
 		stateListt.add(Stato.active);		
 		stateListt.add(Stato.closed);
 		stateListt.add(Stato.frozen);
-
 		for(Stato stat : stateListt) {
 			listModel.addElement(stat);
 		}
-
-
 		stateList.setBounds(10, 135, 193, 49);
 		getContentPane().add(stateList);
 
 
 
-
+		//button to call the add patron function
 		JButton agguingi = new JButton("Agguingi");
 		agguingi.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ArrayList<Libro> patlib = new ArrayList<>();
 				Patrono recvdpat = new Patrono(Integer.parseInt(userIDField.getText()), userPassField.getText(), usernameField.getText(), patlib, stateList.getSelectedValue(), Double.parseDouble(saldoField.getText()));
 				try {
-					recvdAdmn.aggPatrono(recvdpat, recvdbib);
+					recvdadmn.aggPatrono(recvdpat, AgguingiPatronoGUI.this.recvdbib);
 					System.out.println("patrono added succefully");
+					JOptionPane.showMessageDialog(AgguingiPatronoGUI.this, "patron added!");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -136,13 +126,8 @@ public class AgguingiPatronoGUI extends JFrame{
 		agguingi.setBounds(335, 227, 89, 23);
 		getContentPane().add(agguingi);
 
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
 
 	}
+
+
 }

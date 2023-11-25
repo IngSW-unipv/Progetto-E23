@@ -1,13 +1,11 @@
 package it.unipv.ingsw.gi.ricercalibro;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import it.unipv.ingsw.gi.books.Libro;
 
 public interface SearchStrategy<T> {
-	
-	
-	public List<Libro> ricerca(ArrayList<Libro> catalogo, T criterioRicerca);
+
+
+	public ArrayList<Libro> ricerca(ArrayList<Libro> catalogo, T criterioRicerca);
 
 }

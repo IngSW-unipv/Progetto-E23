@@ -1,6 +1,5 @@
 package it.unipv.ingsw.gi.admingui;
 
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -13,76 +12,61 @@ import it.unipv.ingsw.gi.users.Patrono;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
-public class cancPatGUI extends JFrame{
-	private Biblioteca recvdbib;
-	private Admin recvdadmn;
-	private JFrame frame;
-	private JTextField textField;
+public class CancPatGUI extends JFrame{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Biblioteca recvdbibb;
+	private Admin recvdadmnn;
+
 	private JTextField patSearchbar;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					cancPatGUI window = new cancPatGUI(null,null);
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 
 	/**
 	 * Create the application.
 	 */
-	public cancPatGUI(Biblioteca recvdbib,Admin recvdadmn) {
-		this.recvdadmn = recvdadmn;
-		this.recvdbib = recvdbib;
-		
+	public CancPatGUI(Biblioteca recvdbib,Admin recvdadmn) {
+		this.recvdadmnn = recvdadmn;
+		this.recvdbibb = recvdbib;
+		// title and layout
 		setTitle("Cancella Patrono");
 		getContentPane().setLayout(null);
-		
-		
-		
-		
-		
-		
+
+
+
+		//patron search bar
 		patSearchbar = new JTextField();
 		patSearchbar.setBounds(10, 11, 261, 20);
 		getContentPane().add(patSearchbar);
 		patSearchbar.setColumns(10);
-		
-		
-		
+
+
+		// list to hoold the result of the search
 		JList<Patrono> patList = new JList<Patrono>();
 		patList.setBounds(10, 37, 261, 65);
 		getContentPane().add(patList);
-		
-
-		
 		DefaultListModel<Patrono> patlistModel = new DefaultListModel<Patrono>();
 		patList.setModel(patlistModel);
-		
-		
-		
-		
-		
+
+
+
+
+		//button to call the search function
 		JButton cercapatButton = new JButton("Cerca");
 		cercapatButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
+				patlistModel.clear();
 				RicercaperID rpd = new RicercaperID();
 				ArrayList<Patrono> list = new ArrayList<>();
-				for(Patrono p : recvdbib.patrons) {
+				for(Patrono p : recvdbibb.patrons) {
 					list.add(p);
 				}
-				
+
 				list = rpd.ricercaPat(list, Integer.parseInt(patSearchbar.getText()));
 
 				for(Patrono pat : list) {
@@ -92,12 +76,15 @@ public class cancPatGUI extends JFrame{
 
 		cercapatButton.setBounds(281, 10, 89, 23);
 		getContentPane().add(cercapatButton);
-		
+
+
+		//button to call the delete patron function
 		JButton conferma = new JButton("Conferma");
 		conferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					recvdadmn.canPatrono(patList.getSelectedValue(), recvdbib);
+					recvdadmnn.canPatrono(patList.getSelectedValue(), recvdbibb);
+					JOptionPane.showMessageDialog(CancPatGUI.this, "patron deleted succefully!");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -107,17 +94,8 @@ public class cancPatGUI extends JFrame{
 		conferma.setBounds(314, 227, 110, 23);
 		getContentPane().add(conferma);
 
-		
-		
-			}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	}
 
 }
