@@ -87,11 +87,20 @@ public class Admin extends Persona implements Manage ,PropertyChangeListener{
 	
 	@Override
 	public void canPatrono(Patrono patrono,Biblioteca bib) throws Exception{
-		bib.canPat(patrono);
+		bib.canPatrono(patrono);
 		bs.serDelPat(patrono, bib);
 	}
 	
 	
+	@Override
+	public void cambiaStato(Patrono pat, Stato state) throws Exception{
+		pat.setStato(state);
+		PatronoDAO p1 = new PatronoDAO();
+		BibDAO bd = new BibDAO();
+		AdminDAO ad = new AdminDAO();
+		BibServices bs = new BibServices(p1, bd,ad);
+		bs.serCambStato(pat, state);
+	}
 	
 	@Override
 	public void returnbook(PrendeInPrestito bitem, Biblioteca library,Patrono patron) throws Exception {
@@ -161,15 +170,7 @@ public class Admin extends Persona implements Manage ,PropertyChangeListener{
 	}
 
 
-	@Override
-	public void cambiaStato(Patrono pat, Stato state) throws Exception{
-		pat.setStato(state);
-		PatronoDAO p1 = new PatronoDAO();
-		BibDAO bd = new BibDAO();
-		AdminDAO ad = new AdminDAO();
-		BibServices bs = new BibServices(p1, bd,ad);
-		bs.serCambStato(pat, state);
-	}
+	
 	
 	
 	public void visualizzaPostiDisponibili() {
@@ -184,19 +185,9 @@ public class Admin extends Persona implements Manage ,PropertyChangeListener{
 	 }
 
 
-	
-
-
-	@Override
-	public void tolLibro(Libro libro, Biblioteca bib) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
-		// TODO Auto-generated method stub
+		
 		String propertyName = evt.getPropertyName();
         String bookName = ((Libro) evt.getSource()).getTitle();
         boolean isAvailable = (boolean) evt.getNewValue();

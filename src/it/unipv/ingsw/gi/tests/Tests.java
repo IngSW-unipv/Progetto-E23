@@ -6,8 +6,7 @@ import java.util.ArrayList;
 import it.unipv.ingsw.gi.books.Lang;
 import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.library.Biblioteca;
-import it.unipv.ingsw.gi.library.PrendeInPrestito;
-import it.unipv.ingsw.gi.users.Admin;
+
 import it.unipv.ingsw.gi.users.Patrono;
 import it.unipv.ingsw.gi.users.Stato;
 
@@ -18,12 +17,10 @@ public class Tests {
 		
 		Libro booktest = new Libro(34,"the sailor who fell from grace","mishima", true,Lang.English,60);
 		ArrayList<Libro> borrowedBooks = new ArrayList<Libro>();
-		ArrayList<PrendeInPrestito> borrowedBookList = new ArrayList<PrendeInPrestito>();
-		ArrayList<Patrono> patrons = new ArrayList<Patrono>();
-		ArrayList<Admin> admin = new ArrayList<Admin>();
+		
 		Patrono patrontest = new Patrono(1, "password", "john doe",borrowedBooks,  Stato.active,0.0);
-		ArrayList<Libro> books = new ArrayList<Libro>();
-		Biblioteca librarytest = new Biblioteca(borrowedBookList, null, patrons, admin, books);
+		
+		Biblioteca librarytest = Biblioteca.getInstance();
 		librarytest.books.add(booktest);
 		librarytest.patrons.add(patrontest);
 

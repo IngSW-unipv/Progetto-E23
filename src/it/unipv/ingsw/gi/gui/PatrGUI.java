@@ -2,6 +2,8 @@ package it.unipv.ingsw.gi.gui;
 
 
 import javax.swing.JFrame;
+
+import it.unipv.ingsw.gi.controllers.PatronoController;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.users.Patrono;
 import javax.swing.JButton;
@@ -16,7 +18,7 @@ public class PatrGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 	protected Biblioteca recvedbib;
 	protected Patrono recvpat;
-
+	protected PatronoController pc = new PatronoController(recvpat);
 
 	/**
 	 * Create the application.
@@ -33,7 +35,7 @@ public class PatrGUI extends JFrame{
 		JButton btnNewButton = new JButton("Prendi in prestito");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PipGUI newpip =	new PipGUI(PatrGUI.this.recvedbib,recvpat);
+				PipGUI newpip =	new PipGUI(PatrGUI.this.recvedbib,recvpat,pc);
 				newpip.setVisible(true);
 				newpip.setSize(500, 400);
 			}

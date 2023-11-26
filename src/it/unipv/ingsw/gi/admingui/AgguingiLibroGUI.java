@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import it.unipv.ingsw.gi.books.Lang;
 import it.unipv.ingsw.gi.books.Libro;
+import it.unipv.ingsw.gi.controllers.AdminController;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.users.Admin;
 import javax.swing.DefaultListModel;
@@ -30,7 +31,7 @@ public class AgguingiLibroGUI extends JFrame{
 	private JTextField autoreField;
 	private JTextField prezzoField;
 	private JTextField libroIDField;
-
+	protected AdminController admc = new AdminController(recvdAdmn);
 
 	/**
 	 * Create the application.
@@ -132,7 +133,7 @@ public class AgguingiLibroGUI extends JFrame{
 				Libro lib = new Libro(bookid,titoloField.getText(), autoreField.getText(),(Boolean) dispList.getSelectedValue(),(Lang) langListt.getSelectedValue(), bookSaldo);
 
 				try {
-					recvdAdmn.aggLibro(lib, recvdBib);
+					admc.addbookButtonClick(lib, recvdBib, recvdAdmn);
 					JOptionPane.showMessageDialog(AgguingiLibroGUI.this, "book added!");
 				} catch (Exception e1) {
 

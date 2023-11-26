@@ -14,10 +14,11 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import it.unipv.ingsw.gi.books.Libro;
+import it.unipv.ingsw.gi.controllers.PatronoController;
+import it.unipv.ingsw.gi.controllers.SearchController;
+import it.unipv.ingsw.gi.controllers.SearchControllerPerAutore;
+import it.unipv.ingsw.gi.controllers.SearchControllerPerTitolo;
 import it.unipv.ingsw.gi.library.Biblioteca;
-import it.unipv.ingsw.gi.ricercalibro.RicercaPerAutore;
-import it.unipv.ingsw.gi.ricercalibro.RicercaPerTitolo;
-import it.unipv.ingsw.gi.ricercalibro.SearchStrategy;
 import it.unipv.ingsw.gi.users.Patrono;
 
 
@@ -30,13 +31,13 @@ public class PipGUI extends JFrame{
 	private JTextField searchbar;
 	protected Biblioteca recvedbib;
 	protected Patrono recvpat;
-
+	protected PatronoController pc = new PatronoController(recvpat);
 
 
 	/**
 	 * Create the application.
 	 */
-	public PipGUI(Biblioteca recvedbib ,Patrono recvpat) {
+	public PipGUI(Biblioteca recvedbib ,Patrono recvpat,PatronoController pcc) {
 		this.recvedbib = recvedbib;
 		this.recvpat = recvpat;
 
@@ -76,21 +77,23 @@ public class PipGUI extends JFrame{
 		JButton btnNewButton_2 = new JButton("cerca");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				String searchT = (String) searchStrat.getSelectedItem();
 				String searchInput = searchbar.getText();
-
-				SearchStrategy<String> searchstrat;
+				SearchController<String> searchstrat2;
+		
 				if ("per titolo".equals(searchT)) {
-					searchstrat = new RicercaPerTitolo();
+					
+					searchstrat2 = new SearchControllerPerTitolo();
 				}
 				else if ("per autore".equals(searchT)) {
-					searchstrat = new RicercaPerAutore();
+					
+					searchstrat2 = new SearchControllerPerAutore();
 
 				} else {
 					return;
 				}
-
-				ArrayList<Libro> risultati = (ArrayList<Libro>) searchstrat.ricerca(recvedbib.books, searchInput);
+				ArrayList<Libro> risultati = (ArrayList<Libro>) searchstrat2.ricerca(recvedbib.books, searchInput);
 
 				for (Libro item : risultati) {
 					if(item.isAvailable == true) {
@@ -118,8 +121,9 @@ public class PipGUI extends JFrame{
 				if (selectedObject != null) {
 
 					try {
-						recvpat.borrowbook(selectedObject, LocalDate.now(), recvpat, recvedbib);
+						pc.borrowButtonClick(selectedObject, LocalDate.now(), recvpat, recvedbib);
 						JOptionPane.showMessageDialog(PipGUI.this, "book borrowed succefully!");
+						selectedObject.addPropertyChangeListener(recvpat);
 						listModel.clear();
 
 					} catch (Exception e1) {

@@ -12,7 +12,8 @@ public class Anothaone {
 	public static void main(String[] args) throws Exception {
 		
 		
-		Biblioteca bib =  new Biblioteca(null, null, null, null, null);
+		Biblioteca bib = Biblioteca.getInstance();
+		
 		Libro lib1 = new Libro(123, "potere", "swagger", true, Lang.English, 22.2);
 		AdminDAO test = new AdminDAO();
 		

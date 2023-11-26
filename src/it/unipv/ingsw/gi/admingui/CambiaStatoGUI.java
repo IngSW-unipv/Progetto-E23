@@ -4,6 +4,8 @@ package it.unipv.ingsw.gi.admingui;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+
+import it.unipv.ingsw.gi.controllers.AdminController;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
@@ -25,7 +27,7 @@ public class CambiaStatoGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private Admin recvdadmn;
 	private Biblioteca recvdbib;
-
+	protected AdminController admc = new AdminController(recvdadmn);
 	private JTextField patSearchfield;
 
 
@@ -103,14 +105,14 @@ public class CambiaStatoGUI extends JFrame{
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					recvdadmn.cambiaStato(patronResultlist.getSelectedValue(), stateList.getSelectedValue());
-					JOptionPane.showMessageDialog(CambiaStatoGUI.this, "patron state changed succefully!");
-				} catch (Exception e1) {
+					admc.cambiaStatoButtonClick(patronResultlist.getSelectedValue(), stateList.getSelectedValue(),recvdadmin);
+				 	JOptionPane.showMessageDialog(CambiaStatoGUI.this, "patron  state changed succefully!") ;
+			 	} catch (Exception e1) {
 
-					e1.printStackTrace();
-				}
-			}
-		});
+			 		e1.printStackTrace();
+		 		}
+		 	}
+	 	});
 		btnNewButton_1.setBounds(317, 208, 107, 42);
 		getContentPane().add(btnNewButton_1);
 

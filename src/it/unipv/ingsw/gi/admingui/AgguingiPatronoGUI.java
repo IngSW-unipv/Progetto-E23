@@ -3,6 +3,7 @@ package it.unipv.ingsw.gi.admingui;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import it.unipv.ingsw.gi.books.Libro;
+import it.unipv.ingsw.gi.controllers.AdminController;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
@@ -30,13 +31,14 @@ public class AgguingiPatronoGUI extends JFrame{
 	private JTextField userPassField;
 	private JTextField usernameField;
 	private JTextField saldoField;
-
+	protected AdminController admc = new AdminController(recvdadmn);
 
 
 	/**
 	 * Create the application.
 	 */
 	public AgguingiPatronoGUI(Biblioteca recvdbib,Admin recvdAdmn) {
+		setTitle("Agguingi patrono ");
 		this.recvdadmn = recvdAdmn;
 		this.recvdbib = recvdbib;
 		new JFrame();
@@ -114,11 +116,11 @@ public class AgguingiPatronoGUI extends JFrame{
 				ArrayList<Libro> patlib = new ArrayList<>();
 				Patrono recvdpat = new Patrono(Integer.parseInt(userIDField.getText()), userPassField.getText(), usernameField.getText(), patlib, stateList.getSelectedValue(), Double.parseDouble(saldoField.getText()));
 				try {
-					recvdadmn.aggPatrono(recvdpat, AgguingiPatronoGUI.this.recvdbib);
+					admc.addPatronoButtonClick(recvdpat, AgguingiPatronoGUI.this.recvdbib, recvdadmn);
 					System.out.println("patrono added succefully");
 					JOptionPane.showMessageDialog(AgguingiPatronoGUI.this, "patron added!");
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 			}

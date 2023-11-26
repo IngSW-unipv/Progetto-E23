@@ -4,9 +4,10 @@ package it.unipv.ingsw.gi.admingui;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import it.unipv.ingsw.gi.controllers.AdminController;
+import it.unipv.ingsw.gi.controllers.SearchControllerPerID;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.library.PrendeInPrestito;
-import it.unipv.ingsw.gi.ricercalibro.RicercaperID;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
 import javax.swing.JList;
@@ -22,12 +23,11 @@ public class RestitLibGUI extends JFrame{
 	 * 
 	 */
 
-
 	private static final long serialVersionUID = 1L;
 	protected Biblioteca recvedbibb;
 	private JTextField booksearchfield;
 	protected Admin recvedadmm;
-
+	protected AdminController admc = new AdminController(recvedadmm);
 
 
 	/**
@@ -66,12 +66,12 @@ public class RestitLibGUI extends JFrame{
 		patsearchbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listModel.clear();
-				RicercaperID rpd = new RicercaperID();
+				SearchControllerPerID spd = new SearchControllerPerID();
 				ArrayList<PrendeInPrestito> list = new ArrayList<>();
 				for(PrendeInPrestito p : recvedbibb.listPrestiti) {
 					list.add(p);
 				}
-				rpd.ricerca2(list, Integer.parseInt(booksearchfield.getText()));
+				spd.ricercaPrenperIdbuttonpress(list, Integer.parseInt(booksearchfield.getText()));
 
 				for (PrendeInPrestito item : list) {
 					listModel.addElement(item);
@@ -110,8 +110,9 @@ public class RestitLibGUI extends JFrame{
 					}
 				}
 				try {
-					recvAdmin.returnbook( (PrendeInPrestito) bookresultslist.getSelectedValue(), biblioteca, selectedpat);
+					admc.returnButtonClick(selectedpren, biblioteca, selectedpat, recvAdmin);
 					JOptionPane.showMessageDialog(RestitLibGUI.this, "book returned!");
+					selectedpren.getLibro().addPropertyChangeListener(recvAdmin);
 				} catch (Exception e1) {
 
 					e1.printStackTrace();

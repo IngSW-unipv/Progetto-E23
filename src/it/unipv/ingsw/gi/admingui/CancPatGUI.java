@@ -5,8 +5,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
+import it.unipv.ingsw.gi.controllers.AdminController;
+import it.unipv.ingsw.gi.controllers.SearchControllerPerID;
 import it.unipv.ingsw.gi.library.Biblioteca;
-import it.unipv.ingsw.gi.ricercalibro.RicercaperID;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
 import javax.swing.DefaultListModel;
@@ -21,7 +22,7 @@ public class CancPatGUI extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private Biblioteca recvdbibb;
 	private Admin recvdadmnn;
-
+	protected AdminController admc = new AdminController(recvdadmnn);
 	private JTextField patSearchbar;
 
 
@@ -59,15 +60,17 @@ public class CancPatGUI extends JFrame{
 		JButton cercapatButton = new JButton("Cerca");
 		cercapatButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
+				
 				patlistModel.clear();
-				RicercaperID rpd = new RicercaperID();
+				// controller for search by id 
+				SearchControllerPerID sid = new SearchControllerPerID();
 				ArrayList<Patrono> list = new ArrayList<>();
 				for(Patrono p : recvdbibb.patrons) {
 					list.add(p);
 				}
 
-				list = rpd.ricercaPat(list, Integer.parseInt(patSearchbar.getText()));
+				// list with results of the controller method 
+				list = sid.ricercaPatperIdbuttonpress(list, Integer.parseInt(patSearchbar.getText()));
 
 				for(Patrono pat : list) {
 					patlistModel.addElement(pat);
@@ -83,7 +86,7 @@ public class CancPatGUI extends JFrame{
 		conferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					recvdadmnn.canPatrono(patList.getSelectedValue(), recvdbibb);
+					admc.canPatronoButtonClick(patList.getSelectedValue(), recvdbibb,recvdadmnn);
 					JOptionPane.showMessageDialog(CancPatGUI.this, "patron deleted succefully!");
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block

@@ -12,10 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JTextField;
 import it.unipv.ingsw.gi.books.Libro;
+import it.unipv.ingsw.gi.controllers.SearchController;
+import it.unipv.ingsw.gi.controllers.SearchControllerPerAutore;
+import it.unipv.ingsw.gi.controllers.SearchControllerPerTitolo;
 import it.unipv.ingsw.gi.library.Biblioteca;
-import it.unipv.ingsw.gi.ricercalibro.RicercaPerAutore;
-import it.unipv.ingsw.gi.ricercalibro.RicercaPerTitolo;
-import it.unipv.ingsw.gi.ricercalibro.SearchStrategy;
 import it.unipv.ingsw.gi.users.Patrono;
 
 public class RicercaGUI extends JFrame{
@@ -75,26 +75,28 @@ public class RicercaGUI extends JFrame{
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listModel.clear();
+				
 				String searchT = (String) searchStrat.getSelectedItem();
 				String searchInput = searchbar.getText();
-
-				SearchStrategy<String> searchstrat;
+				SearchController<String> searchstrat2;
+		
 				if ("per titolo".equals(searchT)) {
-					searchstrat = new RicercaPerTitolo();
+					
+					searchstrat2 = new SearchControllerPerTitolo();
 				}
 				else if ("per autore".equals(searchT)) {
-					searchstrat = new RicercaPerAutore();
+					
+					searchstrat2 = new SearchControllerPerAutore();
 
 				} else {
 					return;
 				}
-
-				ArrayList<Libro> risultati = (ArrayList<Libro>) searchstrat.ricerca(recvedbib.books, searchInput);
+				ArrayList<Libro> risultati = (ArrayList<Libro>) searchstrat2.ricerca(recvedbib.books, searchInput);
 
 				for (Libro item : risultati) {
-
-					listModel.addElement(item);
-
+				
+						listModel.addElement(item);
+				
 
 				}
 

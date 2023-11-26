@@ -27,6 +27,8 @@ public class RicercaPerTitolo implements SearchStrategy<String>{
 	}
 }
 
+
+
 /*  
 	         if (risultati.size() == 0) {
 	        	 System.out.println(" libro corrispondente a titolo non trovato");

@@ -6,12 +6,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import it.unipv.ingsw.gi.admingui.AdminGUI;
-import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.dao.AdminDAO;
 import it.unipv.ingsw.gi.dao.BibDAO;
 import it.unipv.ingsw.gi.dao.PatronoDAO;
 import it.unipv.ingsw.gi.library.Biblioteca;
-import it.unipv.ingsw.gi.library.PrendeInPrestito;
 import it.unipv.ingsw.gi.service.BibServices;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
@@ -19,7 +17,6 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.ButtonGroup;
@@ -95,12 +92,8 @@ public class LogGUI extends JFrame{
 		BibDAO bibd = new BibDAO();
 		AdminDAO ad = new AdminDAO();
 		BibServices serv = new BibServices(pat,bibd,ad);
-		ArrayList<Patrono> patrons = new ArrayList<>();
-		ArrayList<Admin> admins = new ArrayList<>();
-		ArrayList<PrendeInPrestito> books = new ArrayList<>();
-		ArrayList<Libro> avaiBooks = new ArrayList<>();
-		Biblioteca bib1 = new Biblioteca (books, "bib1", patrons, admins,avaiBooks);
-
+		
+		Biblioteca bib1 = Biblioteca.getInstance();
 		//filling the library with corresponding data
 		serv.serRecAdm(bib1);
 		serv.servRecPat(bib1);

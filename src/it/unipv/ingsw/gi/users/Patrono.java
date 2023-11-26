@@ -15,7 +15,7 @@ import it.unipv.ingsw.gi.dao.AdminDAO;
 import it.unipv.ingsw.gi.dao.BibDAO;
 import it.unipv.ingsw.gi.dao.PatronoDAO;
 
-public class Patrono extends Persona implements Functions , Serializable , PropertyChangeListener{
+public class Patrono extends Persona implements Serializable , PropertyChangeListener{
 
 
 	/**

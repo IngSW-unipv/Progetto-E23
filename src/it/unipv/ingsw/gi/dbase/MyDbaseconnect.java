@@ -108,9 +108,11 @@ public class MyDbaseconnect {
 		return con;
 	}
 
+	
+	
 	//calling the unique instance
 	public static MyDbaseconnect getInstance() {
-
+		
 		if (instance == null ) {
 			instance = new MyDbaseconnect();
 		}

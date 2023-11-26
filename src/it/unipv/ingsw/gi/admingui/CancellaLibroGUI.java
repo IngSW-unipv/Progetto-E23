@@ -6,8 +6,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.*;
 import it.unipv.ingsw.gi.books.Libro;
+import it.unipv.ingsw.gi.controllers.AdminController;
+import it.unipv.ingsw.gi.controllers.SearchControllerPerID;
 import it.unipv.ingsw.gi.library.Biblioteca;
-import it.unipv.ingsw.gi.ricercalibro.RicercaperID;
 import it.unipv.ingsw.gi.users.Admin;
 
 public class CancellaLibroGUI extends JFrame{
@@ -19,7 +20,7 @@ public class CancellaLibroGUI extends JFrame{
 	protected Biblioteca recvedbib;
 	private JTextField booksearchfield;
 	protected Admin recvedadm;
-
+	protected AdminController admc = new AdminController(recvedadm);
 
 
 	/**
@@ -55,12 +56,12 @@ public class CancellaLibroGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				listModel.clear();
-				RicercaperID rpd = new RicercaperID();
+				SearchControllerPerID spd = new SearchControllerPerID();
 				ArrayList<Libro> list = new ArrayList<>();
 				for(Libro p : recvedbib.books) {
 					list.add(p);
 				}
-				list = rpd.ricerca(list, Integer.parseInt(booksearchfield.getText()));
+				list = spd.ricercaLibroperIdbuttonpress(list, Integer.parseInt(booksearchfield.getText()));
 
 				for(Libro lib : list) {
 					listModel.addElement(lib);
@@ -88,10 +89,10 @@ public class CancellaLibroGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 
 				try {
-					recvAdmin.canLibro((Libro) bookresultslist.getSelectedValue(), biblioteca);
+					admc.canbookButtonClick((Libro) bookresultslist.getSelectedValue(), biblioteca,recvAdmin);
 					JOptionPane.showMessageDialog(CancellaLibroGUI.this, "book deleted!");
 				} catch (Exception e1) {
-					// TODO Auto-generated catch block
+					
 					e1.printStackTrace();
 				}
 
