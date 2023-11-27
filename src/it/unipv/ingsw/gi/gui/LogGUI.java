@@ -92,8 +92,8 @@ public class LogGUI extends JFrame{
 		BibDAO bibd = new BibDAO();
 		AdminDAO ad = new AdminDAO();
 		BibServices serv = new BibServices(pat,bibd,ad);
-		
 		Biblioteca bib1 = Biblioteca.getInstance();
+		
 		//filling the library with corresponding data
 		serv.serRecAdm(bib1);
 		serv.servRecPat(bib1);

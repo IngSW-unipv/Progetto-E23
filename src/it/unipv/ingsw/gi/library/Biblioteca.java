@@ -22,7 +22,7 @@ public class Biblioteca implements Serializable {
 	public ArrayList<Admin> admins;
 	public ArrayList<Libro> books;
 	private static Biblioteca instance;
-	
+	private double conto_Biblio;
 
 
 
@@ -37,7 +37,7 @@ public class Biblioteca implements Serializable {
 		this.books = books;
 	}
 
-	
+
 	//calling the unique instance
 	public static Biblioteca getInstance() {
 
@@ -50,7 +50,7 @@ public class Biblioteca implements Serializable {
 		}
 		return instance;
 	}
-	
+
 
 	public String toString() {
 		return this.name;
@@ -129,6 +129,45 @@ public class Biblioteca implements Serializable {
 	}
 
 
+
+	public ArrayList<Libro> getBooks() {
+		return books;
+	}
+
+
+	public void credit_Conto_Biblio(double cifra) {
+		conto_Biblio+= cifra;
+	}
+
+	public double getConto_Biblio() {
+		return conto_Biblio;
+	}
+
+	public Patrono getPatrono(int userID) {
+		Patrono patrono=null;
+		for (Patrono pat: patrons)  
+			if (pat.getPatronID()==userID) {
+				System.out.println("Patrono trovato");
+				patrono=pat;
+				return patrono;
+			}
+
+		System.out.println("Patrono non trovato");
+		return patrono;
+	}
+
+	public boolean ricaricaSaldo(int userID,double amount) {
+		Patrono patron=getPatrono(userID);
+		if (patrons.contains(patron)&&amount>0) { 
+			patron.saldo+=amount;
+			return true;
+		}
+		else 
+			return false;					
+	}
+	
+	
+			
 	public static void main(String[] args) {
 
 
@@ -146,7 +185,9 @@ public class Biblioteca implements Serializable {
 
 
 	}
-
-
+	
+	
+	
 
 }
+

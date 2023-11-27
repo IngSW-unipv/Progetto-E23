@@ -70,7 +70,7 @@ public class CancPatGUI extends JFrame{
 				}
 
 				// list with results of the controller method 
-				list = sid.ricercaPatperIdbuttonpress(list, Integer.parseInt(patSearchbar.getText()));
+				list = sid.ricercaPatperIdbuttonpress(list, Integer.parseInt(patSearchbar.getText()),recvdadmn);
 
 				for(Patrono pat : list) {
 					patlistModel.addElement(pat);

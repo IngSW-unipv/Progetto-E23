@@ -17,7 +17,6 @@ import it.unipv.ingsw.gi.controllers.SearchController;
 import it.unipv.ingsw.gi.controllers.SearchControllerPerAutore;
 import it.unipv.ingsw.gi.controllers.SearchControllerPerTitolo;
 import it.unipv.ingsw.gi.library.Biblioteca;
-import it.unipv.ingsw.gi.ricercalibro.RicercaperID;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
 
@@ -93,13 +92,13 @@ public class AdminpipGui extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 
-				RicercaperID rpd = new RicercaperID();
+				
 				ArrayList<Patrono> list = new ArrayList<>();
 				for(Patrono p : recvedbib.patrons) {
 					list.add(p);
 				}
 
-				list = rpd.ricercaPat(list, Integer.parseInt(patSearchbar.getText()));
+				list = recvadmn.ricercaPat(list, Integer.parseInt(patSearchbar.getText()));
 
 				for(Patrono pat : list) {
 					patlistModel.addElement(pat);

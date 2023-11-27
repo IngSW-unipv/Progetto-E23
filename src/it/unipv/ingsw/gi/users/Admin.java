@@ -3,6 +3,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.dao.AdminDAO;
@@ -137,7 +138,30 @@ public class Admin extends Persona implements Manage ,PropertyChangeListener{
 	}
 	
 	
+	public ArrayList<Patrono> ricercaPat(ArrayList<Patrono> catalogo, Integer id) {
+		ArrayList<Patrono> risultati = new ArrayList<>();
+
+		for (Patrono pat : catalogo) {
+			if (pat.userID == id) {
+				risultati.add(pat);
+				System.out.println(risultati);
+			}
+		}
+		return risultati;
+	}
 	
+	
+	public ArrayList<PrendeInPrestito> ricerca2(ArrayList<PrendeInPrestito> catalogo, Integer id) {
+		ArrayList<PrendeInPrestito> risultati = new ArrayList<>();
+
+		for (PrendeInPrestito prendeinprestito : catalogo) {
+			if (prendeinprestito.libro.getBookID() == id) {
+				risultati.add(prendeinprestito);
+				System.out.println(risultati);
+			}
+		}
+		return risultati;
+	}
 	
 	public int getAdminID() {
 		return userID;

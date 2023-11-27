@@ -3,6 +3,7 @@ package it.unipv.ingsw.gi.admingui;
 
 import javax.swing.JFrame;
 import it.unipv.ingsw.gi.library.Biblioteca;
+import it.unipv.ingsw.gi.posti.PrenotaPosti;
 import it.unipv.ingsw.gi.users.Admin;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -33,6 +34,14 @@ public class CancGUI extends JFrame{
 
 		//button to open the delete preservation interface
 		JButton btnNewButton = new JButton("Cancella Prenotazione");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PrenotaPosti ps = new PrenotaPosti(10);
+				CancellaPrenotazionePostoGUI cpg = new CancellaPrenotazionePostoGUI(ps);
+				cpg.setSize(500,400);
+				cpg.setVisible(true);
+			}
+		});
 		btnNewButton.setBounds(120, 105, 164, 62);
 		getContentPane().add(btnNewButton);
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.library.PrendeInPrestito;
 import it.unipv.ingsw.gi.ricercalibro.RicercaperID;
+import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
 
 public class SearchControllerPerID {
@@ -18,13 +19,13 @@ public class SearchControllerPerID {
 		return rpi.ricerca(catalogo, id);
 	}
 	
-	public ArrayList<PrendeInPrestito> ricercaPrenperIdbuttonpress(ArrayList<PrendeInPrestito> catalogo,Integer id) {
-		return rpi.ricerca2(catalogo, id);
+	public ArrayList<PrendeInPrestito> ricercaPrenperIdbuttonpress(ArrayList<PrendeInPrestito> catalogo,Integer id,Admin admin) {
+		return admin.ricerca2(catalogo, id);
 	}
 	
 	
-	public ArrayList<Patrono> ricercaPatperIdbuttonpress (ArrayList<Patrono> catalogo,Integer id) {
-		return rpi.ricercaPat(catalogo, id);
+	public ArrayList<Patrono> ricercaPatperIdbuttonpress (ArrayList<Patrono> catalogo,Integer id,Admin admin) {
+		return admin.ricercaPat(catalogo, id);
 	}
 	
 	

@@ -68,15 +68,23 @@ public class RestitLibGUI extends JFrame{
 				listModel.clear();
 				SearchControllerPerID spd = new SearchControllerPerID();
 				ArrayList<PrendeInPrestito> list = new ArrayList<>();
-				for(PrendeInPrestito p : recvedbibb.listPrestiti) {
-					list.add(p);
+				spd.ricercaPrenperIdbuttonpress(list, Integer.parseInt(booksearchfield.getText()),recvAdmin);
+				
+				
+				//adding the object to the list only if the id of the user matches
+				Patrono selectedpat = null;
+				for (PrendeInPrestito myObject : recvedbibb.listPrestiti) {
+					selectedpat = myObject.getUtente();
+					if(selectedpat.getPatronID() == Integer.parseInt(booksearchfield.getText())) {
+						list.add(myObject);
+					}
 				}
-				spd.ricercaPrenperIdbuttonpress(list, Integer.parseInt(booksearchfield.getText()));
-
+					
 				for (PrendeInPrestito item : list) {
 					listModel.addElement(item);
+					
 				}
-
+				
 			}
 		});
 

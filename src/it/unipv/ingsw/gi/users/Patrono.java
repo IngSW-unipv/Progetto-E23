@@ -6,6 +6,8 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
+import it.unipv.ingsw.gi.library.Acquistare;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.library.PrendeInPrestito;
 import it.unipv.ingsw.gi.posti.PrenotaPosti;
@@ -178,6 +180,48 @@ public class Patrono extends Persona implements Serializable , PropertyChangeLis
 	}
 	
 
+	
+	
+	
+	public void aggiungi_al_carello(Libro libro) {
+		Biblioteca biblio= Biblioteca.getInstance();
+		
+		if(libro.isAvailable() && biblio.getBooks().contains(libro))
+			carello.add(libro);
+		else {
+			System.out.println("Unable to add book");
+		}
+			return;
+	}
+	
+	
+	
+	public ArrayList<Libro> getCarello() {
+		return carello;
+	}
+	
+	
+	
+	
+	public void richiestaRicaricaSaldo(double amount) {
+		Biblioteca biblio=Biblioteca.getInstance();
+		if(biblio.ricaricaSaldo(getPatronID(),amount))
+			System.out.println("Ricarica effettuata con successo");
+		else {
+			System.out.println("Impossibilità fare ricarica. userID notfound or amount negative");
+		}
+	}
+	
+	
+	
+	public void acquistaLibri() {
+		Biblioteca biblio= Biblioteca.getInstance();
+		Acquistare acquire= new Acquistare();
+		acquire.acquista(biblio.getPatrono(getPatronID()),carello);
+		
+		return;
+	}
+	
 	
 	
 	

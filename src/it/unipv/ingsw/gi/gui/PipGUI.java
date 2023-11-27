@@ -93,7 +93,7 @@ public class PipGUI extends JFrame{
 				} else {
 					return;
 				}
-				ArrayList<Libro> risultati = (ArrayList<Libro>) searchstrat2.ricerca(recvedbib.books, searchInput);
+				ArrayList<Libro> risultati =  searchstrat2.ricerca(recvedbib.books, searchInput);
 
 				for (Libro item : risultati) {
 					if(item.isAvailable == true) {

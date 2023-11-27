@@ -20,8 +20,10 @@ public class prenotaTest {
 					//Admin A3 = new Admin("pomodoro","courgette","blanc");
 					prenotazione.visualizzaPostiDisponibili();
 					prenotazione.prenotaPosto(p1, 1, 60);
-					prenotazione.prenotaPosto(p1, 2, 40);
+				
 					prenotazione.prenotaPosto(p2, 2, 20);
+					
+					
 					prenotazione.cancellaPrenotazione(A1,1);
 					//prenotazione.visualizzaPostiDisponibili();
 					//prenotazione.prenotaPosto(p3, 2, 30);

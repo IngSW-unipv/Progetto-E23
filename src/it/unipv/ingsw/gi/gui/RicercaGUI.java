@@ -75,11 +75,10 @@ public class RicercaGUI extends JFrame{
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listModel.clear();
-				
 				String searchT = (String) searchStrat.getSelectedItem();
 				String searchInput = searchbar.getText();
 				SearchController<String> searchstrat2;
-		
+				
 				if ("per titolo".equals(searchT)) {
 					
 					searchstrat2 = new SearchControllerPerTitolo();
@@ -91,13 +90,12 @@ public class RicercaGUI extends JFrame{
 				} else {
 					return;
 				}
-				ArrayList<Libro> risultati = (ArrayList<Libro>) searchstrat2.ricerca(recvedbib.books, searchInput);
+				ArrayList<Libro> risultati = searchstrat2.ricerca(recvedbib.books, searchInput);
 
 				for (Libro item : risultati) {
 				
 						listModel.addElement(item);
 				
-
 				}
 
 

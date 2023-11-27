@@ -8,7 +8,7 @@ public class PrendeInPrestito {
 
 	public Patrono utente;
 	public Libro libro;
-	public static LocalDate date;
+	public LocalDate date;
 	public Biblioteca biblioteca;
 	
 	
@@ -17,7 +17,7 @@ public class PrendeInPrestito {
 		super();
 		this.utente = utente;
 		this.libro = libro;
-		PrendeInPrestito.date = date;
+		this.date = date;
 		this.biblioteca = biblioteca;
 	}
 	

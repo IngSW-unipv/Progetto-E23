@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 
 import it.unipv.ingsw.gi.controllers.PatronoController;
 import it.unipv.ingsw.gi.library.Biblioteca;
+import it.unipv.ingsw.gi.posti.PrenotaPosti;
 import it.unipv.ingsw.gi.users.Patrono;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -59,8 +60,29 @@ public class PatrGUI extends JFrame{
 		});
 		cercaButton.setBounds(298, 71, 126, 23);
 		getContentPane().add(cercaButton);
+		
+		JButton PrenotaPostoStudio = new JButton("Prenota Posto");
+		PrenotaPostoStudio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PrenotaPosti ps = new PrenotaPosti(10);
+				PrenotaPostoGUI psg = new PrenotaPostoGUI(ps);
+				psg.setSize(500,400);
+				psg.setVisible(true);
+			}
+		});
+		PrenotaPostoStudio.setBounds(10, 105, 134, 23);
+		getContentPane().add(PrenotaPostoStudio);
+		
+		JButton VispostButton = new JButton("visualizza posti");
+		VispostButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				VisualizzaPostoGUI vsg = new VisualizzaPostoGUI();
+				vsg.setSize(500,400);
+				vsg.setVisible(true);
+			}
+		});
+		VispostButton.setBounds(154, 105, 134, 23);
+		getContentPane().add(VispostButton);
 
 	}
-
-
 }
