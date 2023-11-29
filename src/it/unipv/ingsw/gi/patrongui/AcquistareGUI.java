@@ -36,7 +36,7 @@ public class AcquistareGUI extends JFrame{
 		getContentPane().add(textField);
 		textField.setColumns(10);
 		
-		JList list = new JList();
+		JList<Object> list = new JList<Object>();
 		list.setBounds(10, 56, 304, 75);
 		getContentPane().add(list);
 		
@@ -56,7 +56,7 @@ public class AcquistareGUI extends JFrame{
 		btnNewButton_1.setBounds(324, 97, 89, 23);
 		getContentPane().add(btnNewButton_1);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<Object> comboBox = new JComboBox<Object>();
 		comboBox.setBounds(324, 24, 89, 22);
 		getContentPane().add(comboBox);
 		
