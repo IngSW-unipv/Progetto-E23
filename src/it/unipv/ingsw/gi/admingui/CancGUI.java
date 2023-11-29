@@ -29,7 +29,7 @@ public class CancGUI extends JFrame{
 
 		new JFrame();
 		setBounds(100, 100, 469, 309);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		getContentPane().setLayout(null);
 
 		//button to open the delete preservation interface

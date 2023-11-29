@@ -1,4 +1,4 @@
-package it.unipv.ingsw.gi.gui;
+package it.unipv.ingsw.gi.patrongui;
 
 
 import javax.swing.JFrame;
@@ -46,6 +46,13 @@ public class PatrGUI extends JFrame{
 
 		//button for buy method 
 		JButton acquistaButton = new JButton("Aquista");
+		acquistaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AcquistareGUI acq = new AcquistareGUI();
+				acq.setSize(500,400);
+				acq.setVisible(true);
+			}
+		});
 		acquistaButton.setBounds(154, 71, 134, 23);
 		getContentPane().add(acquistaButton);
 

@@ -1,4 +1,4 @@
-package it.unipv.ingsw.gi.gui;
+package it.unipv.ingsw.gi.patrongui;
 
 
 import javax.swing.JFrame;
@@ -20,6 +20,7 @@ import it.unipv.ingsw.gi.controllers.SearchControllerPerAutore;
 import it.unipv.ingsw.gi.controllers.SearchControllerPerTitolo;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.users.Patrono;
+import it.unipv.ingsw.gi.users.Stato;
 
 
 public class PipGUI extends JFrame{
@@ -77,17 +78,17 @@ public class PipGUI extends JFrame{
 		JButton btnNewButton_2 = new JButton("cerca");
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+
 				String searchT = (String) searchStrat.getSelectedItem();
 				String searchInput = searchbar.getText();
 				SearchController<String> searchstrat2;
-		
+
 				if ("per titolo".equals(searchT)) {
-					
+
 					searchstrat2 = new SearchControllerPerTitolo();
 				}
 				else if ("per autore".equals(searchT)) {
-					
+
 					searchstrat2 = new SearchControllerPerAutore();
 
 				} else {
@@ -122,7 +123,13 @@ public class PipGUI extends JFrame{
 
 					try {
 						pc.borrowButtonClick(selectedObject, LocalDate.now(), recvpat, recvedbib);
-						JOptionPane.showMessageDialog(PipGUI.this, "book borrowed succefully!");
+
+						if(recvpat.state != Stato.active) {
+							JOptionPane.showMessageDialog(PipGUI.this, "Account state not active, refer to an admin for help!");
+						}else {
+							JOptionPane.showMessageDialog(PipGUI.this, "Book borrowed succefully!");
+						}
+
 						selectedObject.addPropertyChangeListener(recvpat);
 						listModel.clear();
 

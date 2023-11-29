@@ -1,4 +1,4 @@
-package it.unipv.ingsw.gi.gui;
+package it.unipv.ingsw.gi.patrongui;
 
 import javax.swing.*;
 
@@ -27,7 +27,7 @@ public class PrenotaPostoGUI extends JFrame {
 	        // Impostazione del frame
 	        setTitle("Prenotazione Posto");
 	        setSize(300, 200);
-	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 	        // Creazione dei componenti
 	        numeroPostoField = new JTextField(10);

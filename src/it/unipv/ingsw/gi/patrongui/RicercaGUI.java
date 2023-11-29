@@ -1,4 +1,4 @@
-package it.unipv.ingsw.gi.gui;
+package it.unipv.ingsw.gi.patrongui;
 
 
 import java.awt.event.ActionEvent;
@@ -41,7 +41,6 @@ public class RicercaGUI extends JFrame{
 
 		new JFrame();
 		setBounds(100, 100, 450, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
 
 		//search bar for books

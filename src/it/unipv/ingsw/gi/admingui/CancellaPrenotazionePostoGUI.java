@@ -26,7 +26,7 @@ public class CancellaPrenotazionePostoGUI extends JFrame {
 
 	    private void initialize() {
 	        frame = new JFrame("Cancella Prenotazione");
-	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 	        JPanel mainPanel = new JPanel(new BorderLayout());
 

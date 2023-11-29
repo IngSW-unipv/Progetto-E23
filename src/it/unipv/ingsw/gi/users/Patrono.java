@@ -31,7 +31,16 @@ public class Patrono extends Persona implements Serializable , PropertyChangeLis
 	private PrenotaPosti prenotaPostoStudio;
 	
 	
-
+	/**
+	 * class the defines what a patron is with correlated methods 
+	 * 
+	 * @param userID the patron id
+	 * @param userPASS the patron pass
+	 * @param name the patron name
+	 * @param borrowedBooks list of the borrowed books
+	 * @param state patron state
+	 * @param saldo patron money 
+	 */
 	public Patrono(int userID, String userPASS, String name, ArrayList<Libro> borrowedBooks, 
 			Stato state,double saldo) {
 		super(userID, userPASS, name);
@@ -42,7 +51,11 @@ public class Patrono extends Persona implements Serializable , PropertyChangeLis
 
 
 	
-	
+	/**
+	 * override the inherited method borrow from the super class Persona
+	 * 
+	 * book availability and patron state and the number of books already is borrowed are checked before the transaction
+	 */
 	@Override
 	public void borrowbook(Libro book,LocalDate date,Patrono patron,Biblioteca library) throws Exception{
 		

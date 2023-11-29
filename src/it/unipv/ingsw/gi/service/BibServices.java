@@ -29,9 +29,7 @@ public class BibServices {
 	}
 
 	public void serRisBook(Libro libro , Biblioteca library,Patrono patron) throws Exception{
-
 		admdao.returnBookDao(libro, library, patron);
-
 	}
 
 	public void servRecPat(Biblioteca bib) {
@@ -44,6 +42,11 @@ public class BibServices {
 
 	public void serRecAdm(Biblioteca bib) {
 		bibdao.recAdm(bib);
+	}
+	
+	public void serRecLis(Biblioteca bib) {
+	
+		bibdao.recLispres2(bib);
 	}
 
 	public void serCambStato(Patrono patrono,Stato state) throws Exception{

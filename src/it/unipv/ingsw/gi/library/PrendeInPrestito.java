@@ -12,7 +12,13 @@ public class PrendeInPrestito {
 	public Biblioteca biblioteca;
 	
 	
-	
+	/**
+	 * this is a class the defines the concept of borrowing the book
+	 * @param utente the patron borrowing
+	 * @param libro the book getting borrowed 
+	 * @param date the data of the process
+	 * @param biblioteca the library from which the book is getting borrowed 
+	 */
 	public PrendeInPrestito(Patrono utente, Libro libro, LocalDate date, Biblioteca biblioteca) {
 		super();
 		this.utente = utente;
@@ -21,7 +27,7 @@ public class PrendeInPrestito {
 		this.biblioteca = biblioteca;
 	}
 	
-	
+	//override of the toString method
 	@Override
 	public String toString() {
 		
@@ -45,6 +51,22 @@ public class PrendeInPrestito {
 
 	public Libro getLibro() {
 		return libro;
+	}
+
+	public void setUtente(Patrono utente) {
+		this.utente = utente;
+	}
+
+	public void setLibro(Libro libro) {
+		this.libro = libro;
+	}
+
+	public void setDate(LocalDate date) {
+		this.date = date;
+	}
+
+	public void setBiblioteca(Biblioteca biblioteca) {
+		this.biblioteca = biblioteca;
 	}
 
 

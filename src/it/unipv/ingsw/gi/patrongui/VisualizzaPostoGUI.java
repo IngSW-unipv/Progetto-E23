@@ -1,4 +1,4 @@
-package it.unipv.ingsw.gi.gui;
+package it.unipv.ingsw.gi.patrongui;
 //gestire gli oggetti della swing.
 import javax.swing.*;
 
@@ -64,7 +64,7 @@ public class VisualizzaPostoGUI extends JFrame {
 		});
 
 	        // Impostazioni per il frame
-	        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 	        pack();
 	        setLocationRelativeTo(null); // Posiziona al centro dello schermo
 	        setVisible(true);

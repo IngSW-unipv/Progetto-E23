@@ -1,4 +1,4 @@
-package it.unipv.ingsw.gi.gui;
+package it.unipv.ingsw.gi.patrongui;
 
 
 import javax.swing.JFrame;
@@ -98,6 +98,7 @@ public class LogGUI extends JFrame{
 		serv.serRecAdm(bib1);
 		serv.servRecPat(bib1);
 		serv.servRecLib(bib1);
+		serv.serRecLis(bib1);
 
 
 		Biblioteca[] bibOptions = {
@@ -179,6 +180,10 @@ public class LogGUI extends JFrame{
 		passwordField = new JPasswordField();
 		passwordField.setBounds(136, 72, 148, 20);
 		getContentPane().add(passwordField);
+		
+		
+		System.out.println(bib1.listPrestiti);
+		
 	}
 
 
