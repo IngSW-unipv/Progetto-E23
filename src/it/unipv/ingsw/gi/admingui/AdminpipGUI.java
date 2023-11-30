@@ -13,14 +13,16 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import it.unipv.ingsw.gi.books.Libro;
+import it.unipv.ingsw.gi.controllers.AdminController;
 import it.unipv.ingsw.gi.controllers.SearchController;
 import it.unipv.ingsw.gi.controllers.SearchControllerPerAutore;
 import it.unipv.ingsw.gi.controllers.SearchControllerPerTitolo;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.users.Admin;
 import it.unipv.ingsw.gi.users.Patrono;
+import it.unipv.ingsw.gi.users.Stato;
 
-public class AdminpipGui extends JFrame{
+public class AdminpipGUI extends JFrame{
 	/**
 	 * 
 	 */
@@ -30,11 +32,16 @@ public class AdminpipGui extends JFrame{
 	private Biblioteca recvedbib;
 	private Admin recvdadmn;
 	private JTextField patSearchbar;
+	protected AdminController ac = new AdminController(recvdadmn);
 
 
 
-	// creating the app
-	public AdminpipGui(Biblioteca recvedbib,Admin recvadmn) {
+	/**
+	 *  creating the admin borrow interface
+	 * @param recvedbib library passed on from previous view 
+	 * @param recvadmn admin passed on from previous view
+	 */
+	public AdminpipGUI(Biblioteca recvedbib,Admin recvadmn) {
 		this.recvedbib = recvedbib;
 		this.recvdadmn = recvadmn;
 
@@ -90,9 +97,7 @@ public class AdminpipGui extends JFrame{
 		JButton cercapatButton = new JButton("Cerca");
 		cercapatButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-
-				
+			
 				ArrayList<Patrono> list = new ArrayList<>();
 				for(Patrono p : recvedbib.patrons) {
 					list.add(p);
@@ -151,15 +156,22 @@ public class AdminpipGui extends JFrame{
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				//patron passed is the selection from the jlist same with the book is the one selected from the other list
+				//patron passed is the selection from the Jlist ,same with the book is the one selected from the other Jlist
 				Patrono recvdpat = (Patrono) patList.getSelectedValue();
 				Libro selectedObject = (Libro) results.getSelectedValue();
 				if (selectedObject != null && recvdpat != null) {
 					try {		
-						recvdadmn.borrowbook(selectedObject, LocalDate.now(), recvdpat, AdminpipGui.this.recvedbib);	
+						//service layer call by the controller
+							ac.borrowButtonClick(selectedObject, LocalDate.now(), recvdpat, AdminpipGUI.this.recvedbib, recvadmn);
 						// pop up window for confirmation
-						JOptionPane.showMessageDialog(AdminpipGui.this, "book borrowed succefully!");
-						// clearing the list and listner
+						if(recvdpat.state != Stato.active) {
+							JOptionPane.showMessageDialog(AdminpipGUI.this, "Account state not active, refer to an admin for help!");
+						}else {
+							
+							JOptionPane.showMessageDialog(AdminpipGUI.this, "Book borrowed succefully!");
+							
+						}
+						// clearing the book list and patron list 
 						listModel.clear();
 						patlistModel.clear();
 						selectedObject.addPropertyChangeListener(recvadmn);

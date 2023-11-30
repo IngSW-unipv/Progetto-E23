@@ -31,7 +31,7 @@ public class RestitLibGUI extends JFrame{
 
 
 	/**
-	 * Create the application.
+	 * Creating the return book function view for admins
 	 */
 	public RestitLibGUI(Biblioteca biblioteca,Admin recvAdmin) {
 		this.recvedbibb = biblioteca;
@@ -96,6 +96,7 @@ public class RestitLibGUI extends JFrame{
 		JButton bclearbutton = new JButton("clear");
 		bclearbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				listModel.clear();
 				booksearchfield.setText("");
 			}
 		});
@@ -118,6 +119,7 @@ public class RestitLibGUI extends JFrame{
 					}
 				}
 				try {
+					//calling service layer through the controller 
 					admc.returnButtonClick(selectedpren, biblioteca, selectedpat, recvAdmin);
 					JOptionPane.showMessageDialog(RestitLibGUI.this, "book returned!");
 					selectedpren.getLibro().addPropertyChangeListener(recvAdmin);

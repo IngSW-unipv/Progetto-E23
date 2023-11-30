@@ -24,7 +24,7 @@ public class CancellaLibroGUI extends JFrame{
 
 
 	/**
-	 * Create the application.
+	 * Creating the delete book from catalog interface for admin
 	 */
 	public CancellaLibroGUI(Biblioteca biblioteca,Admin recvAdmin) {
 		this.recvedbib = biblioteca;
@@ -89,6 +89,7 @@ public class CancellaLibroGUI extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 
 				try {
+					//calling service layer through the controller 
 					admc.canbookButtonClick((Libro) bookresultslist.getSelectedValue(), biblioteca,recvAdmin);
 					JOptionPane.showMessageDialog(CancellaLibroGUI.this, "book deleted!");
 				} catch (Exception e1) {

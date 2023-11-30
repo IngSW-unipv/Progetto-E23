@@ -4,6 +4,12 @@ package it.unipv.ingsw.gi.books;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+
+/**book class with correlating methods 
+ * 
+ * @author nassa
+ *
+ */
 public class Libro {
 	public int bookID;
 	public String title;
@@ -13,9 +19,16 @@ public class Libro {
 	public double prezzo;
 	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
-
-
-
+	
+	/**book constructor 
+	 * 
+	 * @param bookID
+	 * @param title
+	 * @param author
+	 * @param isAvailable
+	 * @param language
+	 * @param prezzo
+	 */
 	public Libro(int bookID, String title, String author, Boolean isAvailable, Lang language, double prezzo) {
 		super();
 		this.bookID = bookID;
@@ -73,6 +86,10 @@ public class Libro {
 	}
 
 
+	/**
+	 * method to set the availability of the book with the added function of the observer pattern
+	 * @param isAvailable
+	 */
 	public void setIsAvailable(Boolean isAvailable) {
 		Boolean oldavai = this.isAvailable;
 		this.isAvailable = isAvailable;
@@ -102,12 +119,18 @@ public class Libro {
 		this.language = language;
 	}
 
-	
-	
+
+	/**
+	 * method to add the observer 
+	 * @param listener
+	 */
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.addPropertyChangeListener(listener);
 	}
-
+	/**
+	 * method to remove the observer
+	 * @param listener
+	 */
 	public void removePropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.removePropertyChangeListener(listener);
 	}

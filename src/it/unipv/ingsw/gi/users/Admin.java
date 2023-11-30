@@ -1,33 +1,32 @@
 package it.unipv.ingsw.gi.users;
+
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
 import it.unipv.ingsw.gi.books.Libro;
-import it.unipv.ingsw.gi.dao.AdminDAO;
-import it.unipv.ingsw.gi.dao.BibDAO;
-import it.unipv.ingsw.gi.dao.PatronoDAO;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.library.PrendeInPrestito;
 import it.unipv.ingsw.gi.posti.PrenotaPosti;
-import it.unipv.ingsw.gi.service.BibServices;
 
 
 public class Admin extends Persona implements Manage ,PropertyChangeListener{
 
-	PatronoDAO p1 = new PatronoDAO();
-	BibDAO bd = new BibDAO();
-	AdminDAO ad = new AdminDAO();
-	BibServices bs = new BibServices(p1, bd,ad);
-	
+	/**
+	 * admin class with correlated method 
+	 * 
+	 * @param userID
+	 * @param userPASS
+	 * @param name
+	 */
 	public Admin(int userID, String userPASS, String name) {
 		super(userID, userPASS, name);
 
 	}
 
-	
+	//method to borrow a book 
 	@Override
 	public void borrowbook(Libro book, LocalDate date, Patrono patron, Biblioteca library) throws Exception{
 		if (book.isAvailable == true) {
@@ -38,15 +37,9 @@ public class Admin extends Persona implements Manage ,PropertyChangeListener{
 					PrendeInPrestito borrowedItem = new PrendeInPrestito(patron,book,date,library);
 					library.listPrestiti.add(borrowedItem);
 					book.setIsAvailable(false);
-					PatronoDAO pd = new PatronoDAO();
-					BibDAO pr = new BibDAO();
-					AdminDAO ad = new AdminDAO();
-					BibServices bs = new BibServices(pd,pr,ad);
-					bs.servBorrowBook(book, date, patron, library);
 					System.out.println("book borrowed succefully");
 					System.out.println(library.listPrestiti);
 					System.out.println(patron.borrowedBooks);
-					
 				}
 				else {
 					System.out.println("max number of books allowed already reached please return some books before trying again");
@@ -63,76 +56,74 @@ public class Admin extends Persona implements Manage ,PropertyChangeListener{
 		
 	}
 	
-	
+	//method to add book 
 	@Override
 	public void aggLibro(Libro libro,Biblioteca biblio) throws Exception{
 		biblio.addBook(libro);
-		bs.serAggLib(libro, biblio);
+		
 		
 	}
 	
+	//method to delete a book 
 	@Override
 	public void canLibro(Libro libro,Biblioteca bib) throws Exception{
 		bib.canBook(libro);
-		bs.serDelLibro(libro, bib);
+		
 		
 	}
 	
-	
+	//method to add patron 
 	@Override
 	public void aggPatrono(Patrono patrono, Biblioteca bib) throws Exception {
 		bib.addPatrono(patrono);
-		bs.serAggPat(patrono, bib);
+		
 		
 	}
 	
+	// method to delete a patron
 	@Override
 	public void canPatrono(Patrono patrono,Biblioteca bib) throws Exception{
 		bib.canPatrono(patrono);
-		bs.serDelPat(patrono, bib);
+		
 	}
 	
-	
+	// method to modify a patron state 
 	@Override
 	public void cambiaStato(Patrono pat, Stato state) throws Exception{
 		pat.setStato(state);
-		PatronoDAO p1 = new PatronoDAO();
-		BibDAO bd = new BibDAO();
-		AdminDAO ad = new AdminDAO();
-		BibServices bs = new BibServices(p1, bd,ad);
-		bs.serCambStato(pat, state);
+		
 	}
 	
+	
+	/**
+	 * return book method 
+	 */
 	@Override
-	public void returnbook(PrendeInPrestito bitem, Biblioteca library,Patrono patron) throws Exception {
+	public void returnbook(PrendeInPrestito bitem, Biblioteca library,Patrono patron,Admin admin) throws Exception {
 
 		if (patron.borrowedBooks.contains(bitem.libro)) {
 
 			if (LocalDate.now().isBefore(bitem.getDate())) {
 				patron.borrowedBooks.remove(bitem.libro);
 				bitem.libro.setIsAvailable(true);
-				bs.serRisBook(bitem.libro, library, patron);
-				bitem.libro.setIsAvailable(true);
-				PrendeInPrestito borrowedItem = new PrendeInPrestito(patron,bitem.libro, null, library);
-				library.listPrestiti.remove(borrowedItem);
+				if (bitem.utente.userID == patron.userID) {
+					library.listPrestiti.remove(bitem);
+				}
 				System.out.println("book returned succefully!");
 			}
 			else {
-				
 				patron.setState(Stato.frozen);
 				System.out.println("book returned after allowed loan period and patron state renderded frozen , refer to admins for help");
 				patron.borrowedBooks.remove(bitem.libro);
+				admin.cambiaStato(patron, Stato.frozen);
 				bitem.libro.setIsAvailable(true);
-				ad.cambioStatoDAO(patron, Stato.frozen);
-				bs.serRisBook(bitem.libro, library, patron);
-				bitem.libro.setIsAvailable(true);
-				PrendeInPrestito borrowedItem = new PrendeInPrestito(patron, bitem.libro, null, library);
-				library.listPrestiti.remove(borrowedItem);
+				if (bitem.utente.userID == patron.userID) {
+					library.listPrestiti.remove(bitem);
+				}
 			}
 		}
 
 		else {
-
 			System.out.println("this book wasn't borrowed by the user");
 		}
 	}
@@ -209,6 +200,7 @@ public class Admin extends Persona implements Manage ,PropertyChangeListener{
 	 }
 
 
+	 //method to implement the observer pattern 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		

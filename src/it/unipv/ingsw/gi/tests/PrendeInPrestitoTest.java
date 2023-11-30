@@ -36,7 +36,7 @@ public class PrendeInPrestitoTest {
 		assertEquals(patrontest.borrowedBooks,expected);
 		assertEquals(booktest.isAvailable,false);
 		try {
-			admintest.returnbook(test1, bib, patrontest);
+			admintest.returnbook(test1, bib, patrontest,admintest);
 			expected.remove(booktest);
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -11,6 +11,11 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * class for the patron function selection view 
+ * @author nassa
+ *
+ */
 public class PatrGUI extends JFrame{
 
 	/**
@@ -22,7 +27,7 @@ public class PatrGUI extends JFrame{
 	protected PatronoController pc = new PatronoController(recvpat);
 
 	/**
-	 * Create the application.
+	 * Creating the view 
 	 */
 	public PatrGUI(Biblioteca recvedbib ,Patrono recvpat) {
 		this.recvedbib = recvedbib;
@@ -68,6 +73,7 @@ public class PatrGUI extends JFrame{
 		cercaButton.setBounds(298, 71, 126, 23);
 		getContentPane().add(cercaButton);
 		
+		//button to reserve a seat 
 		JButton PrenotaPostoStudio = new JButton("Prenota Posto");
 		PrenotaPostoStudio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,6 +86,7 @@ public class PatrGUI extends JFrame{
 		PrenotaPostoStudio.setBounds(10, 105, 134, 23);
 		getContentPane().add(PrenotaPostoStudio);
 		
+		//button to view available seats
 		JButton VispostButton = new JButton("visualizza posti");
 		VispostButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -28,7 +28,7 @@ public class CancPatGUI extends JFrame{
 
 
 	/**
-	 * Create the application.
+	 * Creating the delete patron from database view
 	 */
 	public CancPatGUI(Biblioteca recvdbib,Admin recvdadmn) {
 		this.recvdadmnn = recvdadmn;
@@ -46,7 +46,7 @@ public class CancPatGUI extends JFrame{
 		patSearchbar.setColumns(10);
 
 
-		// list to hoold the result of the search
+		// list to hold the result of the search
 		JList<Patrono> patList = new JList<Patrono>();
 		patList.setBounds(10, 37, 261, 65);
 		getContentPane().add(patList);
@@ -86,6 +86,7 @@ public class CancPatGUI extends JFrame{
 		conferma.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//calling service layer through the controller 
 					admc.canPatronoButtonClick(patList.getSelectedValue(), recvdbibb,recvdadmnn);
 					JOptionPane.showMessageDialog(CancPatGUI.this, "patron deleted succefully!");
 				} catch (Exception e1) {

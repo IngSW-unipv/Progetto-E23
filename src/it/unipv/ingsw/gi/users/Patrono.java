@@ -6,16 +6,11 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-
 import it.unipv.ingsw.gi.library.Acquistare;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.library.PrendeInPrestito;
 import it.unipv.ingsw.gi.posti.PrenotaPosti;
-import it.unipv.ingsw.gi.service.BibServices;
 import it.unipv.ingsw.gi.books.Libro;
-import it.unipv.ingsw.gi.dao.AdminDAO;
-import it.unipv.ingsw.gi.dao.BibDAO;
-import it.unipv.ingsw.gi.dao.PatronoDAO;
 
 public class Patrono extends Persona implements Serializable , PropertyChangeListener{
 
@@ -67,15 +62,9 @@ public class Patrono extends Persona implements Serializable , PropertyChangeLis
 					PrendeInPrestito borrowedItem = new PrendeInPrestito(patron,book,date,library);
 					library.listPrestiti.add(borrowedItem);
 					book.setIsAvailable(false);
-					PatronoDAO pd = new PatronoDAO();
-					BibDAO pr = new BibDAO();
-					AdminDAO ad = new AdminDAO();
-					BibServices bs = new BibServices(pd,pr,ad);
-					bs.servBorrowBook(book, date, patron, library);
 					System.out.println("book borrowed succefully");
 					System.out.println(library.listPrestiti);
 					System.out.println(patron.borrowedBooks);
-					
 				}
 				else {
 					System.out.println("max number of books allowed already reached please return some books before trying again");
@@ -182,6 +171,7 @@ public class Patrono extends Persona implements Serializable , PropertyChangeLis
 
 
 
+	//method for the pattern observer 
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		// TODO Auto-generated method stub

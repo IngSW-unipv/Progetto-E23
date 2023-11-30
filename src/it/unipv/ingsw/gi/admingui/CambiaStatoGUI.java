@@ -32,7 +32,7 @@ public class CambiaStatoGUI extends JFrame{
 
 
 	/**
-	 * Create the application.
+	 * Creating the state modification view for the admin 
 	 */
 	public CambiaStatoGUI(Biblioteca recvedbib,Admin recvdadmin) {
 		getContentPane().setLayout(null);
@@ -105,6 +105,7 @@ public class CambiaStatoGUI extends JFrame{
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
+					//calling service layer through the controller 
 					admc.cambiaStatoButtonClick(patronResultlist.getSelectedValue(), stateList.getSelectedValue(),recvdadmin);
 				 	JOptionPane.showMessageDialog(CambiaStatoGUI.this, "patron  state changed succefully!") ;
 			 	} catch (Exception e1) {

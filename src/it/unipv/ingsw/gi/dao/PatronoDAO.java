@@ -10,6 +10,11 @@ import it.unipv.ingsw.gi.dbase.MyDbaseconnect;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.users.Patrono;
 
+/**
+ * Dao that handles all the action with the database related to the patron
+ * @author nassa
+ *
+ */
 public class PatronoDAO implements IPatronoDAO {
 
 	// Singleton connection instance and needed prepared sql statements

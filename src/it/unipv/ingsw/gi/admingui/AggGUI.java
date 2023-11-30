@@ -22,7 +22,7 @@ public class AggGUI extends JFrame{
 
 
 	/**
-	 * Create the application.
+	 * Create the add function selection view.
 	 */
 	public AggGUI(Biblioteca recdbib,Admin recdAdmin) {
 		this.recvdadmn= recdAdmin;

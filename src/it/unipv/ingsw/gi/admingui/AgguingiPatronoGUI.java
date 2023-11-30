@@ -35,7 +35,7 @@ public class AgguingiPatronoGUI extends JFrame{
 
 
 	/**
-	 * Create the application.
+	 * Creating the add patron view 
 	 */
 	public AgguingiPatronoGUI(Biblioteca recvdbib,Admin recvdAdmn) {
 		setTitle("Agguingi patrono ");
@@ -103,7 +103,7 @@ public class AgguingiPatronoGUI extends JFrame{
 		for(Stato stat : stateListt) {
 			listModel.addElement(stat);
 		}
-		stateList.setBounds(10, 135, 193, 49);
+		stateList.setBounds(10, 135, 193, 68);
 		getContentPane().add(stateList);
 
 

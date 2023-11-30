@@ -20,7 +20,7 @@ public class CancGUI extends JFrame{
 
 
 	/**
-	 * Create the application.
+	 * Creating the cancel function selection interface
 	 */
 	public CancGUI(Biblioteca recvBib,Admin recvdadmn) {
 		setTitle("cancel selection");

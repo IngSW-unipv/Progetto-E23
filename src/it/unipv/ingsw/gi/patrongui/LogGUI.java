@@ -22,23 +22,25 @@ import javax.swing.JPasswordField;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 
-
+/**
+ * class for the login view 
+ * @author nassa
+ *
+ */
 public class LogGUI extends JFrame{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
 	private JTextField userIdTextField;
 	private JPasswordField passwordField;
 
 
 	/**
-	 * Create the application.
+	 * Creating the login view
 	 */
 	public LogGUI() {
 	
-		//fram title and layout
+		//frame title and layout
 		new JFrame();
 		setTitle("Login");
 		setBounds(100, 100, 450, 300);
@@ -87,12 +89,13 @@ public class LogGUI extends JFrame{
 		bibComboBox.setBounds(108, 208, 119, 22);
 		getContentPane().add(bibComboBox);
 
-
+		Admin backup = new Admin(50, "backup", "default");
 		PatronoDAO pat= new PatronoDAO();
 		BibDAO bibd = new BibDAO();
 		AdminDAO ad = new AdminDAO();
 		BibServices serv = new BibServices(pat,bibd,ad);
 		Biblioteca bib1 = Biblioteca.getInstance();
+		bib1.admins.add(backup);
 		
 		//filling the library with corresponding data
 		serv.serRecAdm(bib1);
@@ -101,16 +104,22 @@ public class LogGUI extends JFrame{
 		serv.serRecLis(bib1);
 
 
+		// bib options for further expansion in the future if needed 
 		Biblioteca[] bibOptions = {
 				bib1
 		}; 
-		
-
+	
 		DefaultComboBoxModel<Biblioteca> model = new DefaultComboBoxModel<Biblioteca>();
 		model.addElement(bib1);
 		bibComboBox.setModel(model);
 		bibComboBox = new JComboBox<Biblioteca>(bibOptions);
 		Biblioteca bibselect =(Biblioteca) bibComboBox.getSelectedItem() ;
+		
+		
+		//password field input
+		passwordField = new JPasswordField();
+		passwordField.setBounds(136, 72, 148, 20);
+		getContentPane().add(passwordField);
 
 
 		//button for the login function
@@ -131,8 +140,6 @@ public class LogGUI extends JFrame{
 						break; 
 					}
 				}
-
-				
 				Admin selectedAdmin = null;
 				for(Admin admin : bibselect.admins) {
 					if(admin.getAdminID() == username) {
@@ -140,16 +147,12 @@ public class LogGUI extends JFrame{
 						break;
 					}
 				}
-
-
-
 				if (userType.equals("User")) {
 					JOptionPane.showMessageDialog(LogGUI.this, "Welcome, User!");
 					PatrGUI Patrgui = new PatrGUI(bibselect,selectedPatrono);
 
 					Patrgui.setSize(500, 400);
 					Patrgui.setVisible(true);
-
 
 				} else if (userType.equals("Admin")) {
 					JOptionPane.showMessageDialog(LogGUI.this, "Welcome, Admin!");
@@ -158,12 +161,9 @@ public class LogGUI extends JFrame{
 					admgui.setSize(500,400);
 					admgui.setVisible(true);
 
-
 				} else {
 					JOptionPane.showMessageDialog(LogGUI.this, "Invalid username or password.");
 				}
-
-
 			}
 
 		});
@@ -174,12 +174,7 @@ public class LogGUI extends JFrame{
 		getContentPane().add(btnNewButton);
 
 		
-
-
-
-		passwordField = new JPasswordField();
-		passwordField.setBounds(136, 72, 148, 20);
-		getContentPane().add(passwordField);
+		
 		
 		
 		System.out.println(bib1.listPrestiti);

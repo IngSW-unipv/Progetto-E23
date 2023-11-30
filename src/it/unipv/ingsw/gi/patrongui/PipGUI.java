@@ -23,6 +23,11 @@ import it.unipv.ingsw.gi.users.Patrono;
 import it.unipv.ingsw.gi.users.Stato;
 
 
+/**
+ * class for the borrow function view for the patron
+ * @author nassa
+ *
+ */
 public class PipGUI extends JFrame{
 
 	/**
@@ -36,7 +41,7 @@ public class PipGUI extends JFrame{
 
 
 	/**
-	 * Create the application.
+	 * Creating the view 
 	 */
 	public PipGUI(Biblioteca recvedbib ,Patrono recvpat,PatronoController pcc) {
 		this.recvedbib = recvedbib;
@@ -111,25 +116,29 @@ public class PipGUI extends JFrame{
 
 		btnNewButton_2.setBounds(281, 92, 89, 23);
 		getContentPane().add(btnNewButton_2);
-
+		
+	
 
 		//Confirmation button that calls for the borrow method 
 		JButton btnNewButton = new JButton("conferma");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				 
+			     
 				Libro selectedObject = (Libro) results.getSelectedValue();
 				if (selectedObject != null) {
 
 					try {
+						//calling the service layer through the controller
 						pc.borrowButtonClick(selectedObject, LocalDate.now(), recvpat, recvedbib);
-
 						if(recvpat.state != Stato.active) {
 							JOptionPane.showMessageDialog(PipGUI.this, "Account state not active, refer to an admin for help!");
 						}else {
+							
 							JOptionPane.showMessageDialog(PipGUI.this, "Book borrowed succefully!");
+							
 						}
-
+						
 						selectedObject.addPropertyChangeListener(recvpat);
 						listModel.clear();
 
@@ -158,8 +167,5 @@ public class PipGUI extends JFrame{
 
 
 	}
-
-
-
 
 }

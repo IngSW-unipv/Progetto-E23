@@ -3,6 +3,8 @@ package it.unipv.ingsw.gi.patrongui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -10,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import it.unipv.ingsw.gi.books.Libro;
 import it.unipv.ingsw.gi.controllers.SearchController;
@@ -18,6 +21,11 @@ import it.unipv.ingsw.gi.controllers.SearchControllerPerTitolo;
 import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.users.Patrono;
 
+/**
+ * class for the search function view 
+ * @author nassa
+ *
+ */
 public class RicercaGUI extends JFrame{
 
 	/**
@@ -31,7 +39,7 @@ public class RicercaGUI extends JFrame{
 
 
 	/**
-	 * Create the application.
+	 * Creating the view 
 	 */
 	public RicercaGUI(Biblioteca recvdbib,Patrono recvdpat) {
 		setTitle("Cerca ");
@@ -103,7 +111,7 @@ public class RicercaGUI extends JFrame{
 
 
 
-		btnNewButton_2.setBounds(281, 43, 89, 23);
+		btnNewButton_2.setBounds(281, 43, 109, 23);
 		getContentPane().add(btnNewButton_2);
 
 
@@ -117,6 +125,27 @@ public class RicercaGUI extends JFrame{
 		});
 		btnNewButton_1.setBounds(335, 198, 89, 23);
 		getContentPane().add(btnNewButton_1);
+		
+		JButton updateButton = new JButton("Interressato");
+		updateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Libro selectedObject = (Libro) results.getSelectedValue();
+				selectedObject.addPropertyChangeListener(recvdpat);
+				Boolean initialValue = selectedObject.getIsAvailable();
+				JOptionPane.showMessageDialog(RicercaGUI.this,"You will be notified when the book is available!");
+				if (selectedObject.getIsAvailable() != initialValue) {
+					ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+				    PrintStream printStream = new PrintStream(outputStream);
+				    System.setOut(printStream);
+				    String consoleOutput = outputStream.toString();
+				    JOptionPane.showMessageDialog(RicercaGUI.this, consoleOutput);
+					JOptionPane.showMessageDialog(RicercaGUI.this,"book state changed!");
+				}
+				
+			}
+		});
+		updateButton.setBounds(281, 77, 109, 23);
+		getContentPane().add(updateButton);
 
 
 	}

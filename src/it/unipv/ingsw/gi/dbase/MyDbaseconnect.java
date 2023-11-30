@@ -4,6 +4,11 @@ import java.io.FileInputStream;
 import java.sql.*;
 import java.util.Properties;
 
+/**
+ * connection class
+ * @author nassa
+ *
+ */
 public class MyDbaseconnect {
 
 	private static final String PROPERTYDBDRIVER = "DBDRIVER";
@@ -118,17 +123,6 @@ public class MyDbaseconnect {
 		}
 		return instance;
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 
 }

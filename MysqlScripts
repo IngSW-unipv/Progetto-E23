@@ -1,0 +1,41 @@
+CREATE TABLE `admins` (
+  `userID` int NOT NULL,
+  `userpass` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  PRIMARY KEY (`userID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `libro` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `author` varchar(255) NOT NULL,
+  `isAvailable` tinyint(1) NOT NULL,
+  `prezzo` double NOT NULL,
+  `lingua` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `libro_chk_1` CHECK ((`lingua` in (_utf8mb4'English',_utf8mb4'Italian',_utf8mb4'French',_utf8mb4'German',_utf8mb4'Spanish')))
+) ENGINE=InnoDB AUTO_INCREMENT=568 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `listprestiti` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `patronoID` varchar(255) NOT NULL,
+  `patrono` varchar(255) NOT NULL,
+  `libro` varchar(255) NOT NULL,
+  `date` date NOT NULL,
+  `biblioteca` varchar(255) NOT NULL,
+  `bookID` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `patrono` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `stato` enum('active','frozen','closed') NOT NULL,
+  `biblioteca` varchar(255) NOT NULL,
+  `userPass` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `saldo` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2318 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

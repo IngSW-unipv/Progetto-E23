@@ -19,21 +19,24 @@ public class BibDAO implements IBibDAO{
 
 
 	MyDbaseconnect dbConnect = MyDbaseconnect.getInstance();
+	
 	/**
-	 * method to call all the borrowed books list in the database from the library and add the data where appropriate 
+	 * method to call all the borrowed books list in the database to the library and add the data where appropriate 
 	 * @param bib the library
 	 */
-	public void recLispres2(Biblioteca bib) {
+	public void recLispres(Biblioteca bib) {
 		// TODO Auto-generated method stub
 		ArrayList<Libro> prev = new ArrayList<Libro>();
 
+		
+		/**
+		 * creating an array list with all the books that got borrowed from the database
+		 */
 		try (Connection conn = dbConnect.getConnection();
 				Statement bookstat = conn.prepareStatement("SELECT * from bibfin.libro");
 				ResultSet resultSet2 = bookstat.executeQuery("SELECT * from bibfin.libro"))
 		{
-
-
-			while (resultSet2.next()) {
+		while (resultSet2.next()) {
 				if (resultSet2.getBoolean("isAvailable") == false) {
 
 					Libro book = new Libro(0, "", "", null, null, 0.0);
@@ -56,7 +59,9 @@ public class BibDAO implements IBibDAO{
 		}
 		
 		
-
+		/**
+		 * adding the borrowed books to the corresponding patron 
+		 */
 		try (Connection conn = dbConnect.getConnection();
 
 				Statement patstatement = conn.prepareStatement("SELECT * from bibfin.listprestiti");
@@ -85,7 +90,9 @@ public class BibDAO implements IBibDAO{
 
 	}
 
-	//method to recall all patrons from database to the library array
+	/**
+	 * method to call all patrons from database to the library array
+	 */
 	@Override
 	public void recPat(Biblioteca bib) {
 		// TODO Auto-generated method stub
@@ -114,18 +121,16 @@ public class BibDAO implements IBibDAO{
 			e.printStackTrace(); // Handle the exception according to your application's needs
 		}
 
-
-
 		System.out.println(bib.patrons);
 
 	}
 
-	//method to recall all the books from datatbase to the library array
+	/**
+	 * method to call all the books from database to the library array
+	 */
 	@Override
 	public void recLib(Biblioteca bib) {
 		// TODO Auto-generated method stub
-
-
 
 		try (Connection conn = dbConnect.getConnection();
 				Statement libstatement = conn.prepareStatement("SELECT * from bibfin.libro");
@@ -160,7 +165,9 @@ public class BibDAO implements IBibDAO{
 
 	}
 
-	//method to recall all the admins from the database to the library array
+	/**
+	 * method to call all the admins from the database to the library array
+	 */
 	@Override
 	public void recAdm(Biblioteca bib) {
 		// TODO Auto-generated method stub

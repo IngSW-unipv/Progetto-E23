@@ -9,6 +9,12 @@ import it.unipv.ingsw.gi.library.Biblioteca;
 import it.unipv.ingsw.gi.users.Patrono;
 import it.unipv.ingsw.gi.users.Stato;
 
+
+/**
+ * Dao that handles all the action with the database related to the admin
+ * @author nassa
+ *
+ */
 public class AdminDAO implements IAdminDAO{
 
 	// the single connection instance and needed prepared statements
@@ -20,7 +26,6 @@ public class AdminDAO implements IAdminDAO{
 	private static final String uUpdayestmnt="UPDATE patrono SET stato = ? WHERE id = ?";
 	private static final String bookdltSTmnt="DELETE FROM libro WHERE id = ?";
 	private static final String patdltStmnt="DELETE FROM patrono WHere id = ?";
-
 
 
 	public AdminDAO() {

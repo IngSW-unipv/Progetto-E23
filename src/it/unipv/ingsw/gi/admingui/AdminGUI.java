@@ -38,7 +38,7 @@ public class AdminGUI extends JFrame{
 		JButton prenINPres = new JButton("Prendi In Prestito");
 		prenINPres.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				AdminpipGui apip = new  AdminpipGui(bibselect, recevadm);
+				AdminpipGUI apip = new  AdminpipGUI(bibselect, recevadm);
 				apip.setSize(500,400);
 				apip.setVisible(true);
 			}

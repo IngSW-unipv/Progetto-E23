@@ -34,7 +34,7 @@ public class AgguingiLibroGUI extends JFrame{
 	protected AdminController admc = new AdminController(recvdAdmn);
 
 	/**
-	 * Create the application.
+	 * Creating the add book view
 	 */
 	public AgguingiLibroGUI(Biblioteca recvBib,Admin rec) {
 		this.recvdBib = recvBib;
@@ -133,6 +133,7 @@ public class AgguingiLibroGUI extends JFrame{
 				Libro lib = new Libro(bookid,titoloField.getText(), autoreField.getText(),(Boolean) dispList.getSelectedValue(),(Lang) langListt.getSelectedValue(), bookSaldo);
 
 				try {
+					// calling the service layer through the controller 
 					admc.addbookButtonClick(lib, recvdBib, recvdAdmn);
 					JOptionPane.showMessageDialog(AgguingiLibroGUI.this, "book added!");
 				} catch (Exception e1) {
