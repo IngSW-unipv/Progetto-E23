@@ -1,4 +1,4 @@
-package it.unipv.ingsw.gi.admingui;
+package it.unipv.ingsw.gi.patrongui;
 
 
 
@@ -15,18 +15,15 @@ public class CancellaPrenotazionePostoGUI extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private PrenotaPosti prenotazione;
-	    private JFrame frame;
+	    
 	    private JTextArea risultatiArea;
 	    private JTextField numeroPostoField;
 
 	    public CancellaPrenotazionePostoGUI(PrenotaPosti prenotazione) {
 	        this.prenotazione = prenotazione;
-	        initialize();
-	    }
-
-	    private void initialize() {
-	        frame = new JFrame("Cancella Prenotazione");
-	        frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+	        
+	       
+	        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 
 	        JPanel mainPanel = new JPanel(new BorderLayout());
 
@@ -73,14 +70,15 @@ public class CancellaPrenotazionePostoGUI extends JFrame {
 	        });
 	        mainPanel.add(inputPanel, BorderLayout.SOUTH);
 
-	        frame.getContentPane().add(mainPanel);
-	        frame.pack();
-	        frame.setLocationRelativeTo(null);
-	        frame.setVisible(true);
+	        getContentPane().add(mainPanel);
+	        pack();
+	        setLocationRelativeTo(null);
+	        setVisible(true);
+	      
 	    }
 
-	    public static void main(String[] args) {
-	    	PrenotaPosti prenotazione = new PrenotaPosti(10);
-	        SwingUtilities.invokeLater(() -> new CancellaPrenotazionePostoGUI(prenotazione));
+	    public PrenotaPosti getPrenotazione() {
+	    	return this.prenotazione;
 	    }
+	   
 }

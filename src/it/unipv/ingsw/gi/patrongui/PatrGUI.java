@@ -73,11 +73,13 @@ public class PatrGUI extends JFrame{
 		cercaButton.setBounds(298, 71, 126, 23);
 		getContentPane().add(cercaButton);
 		
+		PrenotaPosti ps = new PrenotaPosti(10);
+		
 		//button to reserve a seat 
 		JButton PrenotaPostoStudio = new JButton("Prenota Posto");
 		PrenotaPostoStudio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PrenotaPosti ps = new PrenotaPosti(10);
+			
 				PrenotaPostoGUI psg = new PrenotaPostoGUI(ps);
 				psg.setSize(500,400);
 				psg.setVisible(true);
@@ -90,13 +92,26 @@ public class PatrGUI extends JFrame{
 		JButton VispostButton = new JButton("visualizza posti");
 		VispostButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				VisualizzaPostoGUI vsg = new VisualizzaPostoGUI();
+				
+				VisualizzaPostoGUI vsg = new VisualizzaPostoGUI(ps);
 				vsg.setSize(500,400);
 				vsg.setVisible(true);
 			}
 		});
 		VispostButton.setBounds(154, 105, 134, 23);
 		getContentPane().add(VispostButton);
+		
+		JButton cancellaButton = new JButton("Cancella Prenota");
+		cancellaButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CancellaPrenotazionePostoGUI cpg = new CancellaPrenotazionePostoGUI(ps);
+				cpg.setSize(500,400);
+				cpg.setVisible(true);
+				
+			}
+		});
+		cancellaButton.setBounds(298, 105, 126, 23);
+		getContentPane().add(cancellaButton);
 
 	}
 }

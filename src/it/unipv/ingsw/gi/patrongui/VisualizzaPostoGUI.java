@@ -16,18 +16,19 @@ public class VisualizzaPostoGUI extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextArea risultatiArea;
-	
+	private PrenotaPosti prenotazionee;
 	
   
 	// costruttore della classe.
-	public VisualizzaPostoGUI() {
+	public VisualizzaPostoGUI(PrenotaPosti prenotazione) {
+		
 		
 		// chiamata al costruttore della classe madre JFrame con titolo PrenotazionePostoStudio
 		super("Prenotazione Posti Studio");
-		
+		this.prenotazionee = prenotazione;
 		
 		/// inizializzazione di un istanza di PrenotazionePostoStudio con 20 posti.
-		PrenotaPosti prenotazione = new PrenotaPosti(10);
+		
 		
 		// creazione del pulsante posti disponibili
 		JButton visualizzaButton = new JButton(" Posti Disponibili");
@@ -59,9 +60,15 @@ public class VisualizzaPostoGUI extends JFrame {
 				
 				// impostazione del testo del area di testo con il risultato del metodo.
 				risultatiArea.setText("Posti disponibili:\n" + prenotazione.getPostiDisponibiliAsString());
+				
+				
+				
 
 			}
 		});
+		
+		
+		
 
 	        // Impostazioni per il frame
 	        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -70,12 +77,21 @@ public class VisualizzaPostoGUI extends JFrame {
 	        setVisible(true);
 	    }
 // metodo principale per l'esecuzione dell'applicazione Swing.
+	
+	public PrenotaPosti getPrenotazione() {
+		return prenotazionee;
+	}
+	
+	
 	    public static void main(String[] args) {
+	    	
+	    	PrenotaPosti prenotazione = new PrenotaPosti(10);
+	    	
 	        SwingUtilities.invokeLater(new Runnable() {
 	            public void run() {
 	            	
 	            	// creazione di un istanza della classe.
-	                new VisualizzaPostoGUI();
+	                new VisualizzaPostoGUI(prenotazione);
 	            }
 	        });
 	    }

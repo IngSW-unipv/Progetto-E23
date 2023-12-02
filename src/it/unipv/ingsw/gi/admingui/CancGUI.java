@@ -3,6 +3,7 @@ package it.unipv.ingsw.gi.admingui;
 
 import javax.swing.JFrame;
 import it.unipv.ingsw.gi.library.Biblioteca;
+import it.unipv.ingsw.gi.patrongui.CancellaPrenotazionePostoGUI;
 import it.unipv.ingsw.gi.posti.PrenotaPosti;
 import it.unipv.ingsw.gi.users.Admin;
 import javax.swing.JButton;
