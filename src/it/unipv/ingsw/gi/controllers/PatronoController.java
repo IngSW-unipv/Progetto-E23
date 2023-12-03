@@ -46,7 +46,9 @@ public class PatronoController {
 		
 	}
 	
-	
+	public void interessatoButtonClick(Patrono patrono,Libro libro) {
+		bs.serInterssato(patrono, libro);
+	}
 	
 
 }

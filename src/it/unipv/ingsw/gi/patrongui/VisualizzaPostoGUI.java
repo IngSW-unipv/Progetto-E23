@@ -83,18 +83,6 @@ public class VisualizzaPostoGUI extends JFrame {
 	}
 	
 	
-	    public static void main(String[] args) {
-	    	
-	    	PrenotaPosti prenotazione = new PrenotaPosti(10);
-	    	
-	        SwingUtilities.invokeLater(new Runnable() {
-	            public void run() {
-	            	
-	            	// creazione di un istanza della classe.
-	                new VisualizzaPostoGUI(prenotazione);
-	            }
-	        });
-	    }
 	
 		
 	}

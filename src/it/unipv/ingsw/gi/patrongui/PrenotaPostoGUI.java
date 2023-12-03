@@ -78,10 +78,6 @@ public class PrenotaPostoGUI extends JFrame {
 	        }
 	    }
 
-	    public static void main(String[] args) {
-	    	PrenotaPosti prenotazione = new PrenotaPosti(10);
-	        SwingUtilities.invokeLater(() -> new PrenotaPostoGUI(prenotazione));
-	    }
 }
 
 	

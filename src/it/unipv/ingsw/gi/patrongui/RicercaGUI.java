@@ -15,6 +15,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import it.unipv.ingsw.gi.books.Libro;
+import it.unipv.ingsw.gi.controllers.PatronoController;
 import it.unipv.ingsw.gi.controllers.SearchController;
 import it.unipv.ingsw.gi.controllers.SearchControllerPerAutore;
 import it.unipv.ingsw.gi.controllers.SearchControllerPerTitolo;
@@ -45,6 +46,7 @@ public class RicercaGUI extends JFrame{
 		setTitle("Cerca ");
 		this.recvedbib = recvdbib; 
 		this.recvpat = recvdpat;
+		PatronoController pc = new PatronoController(recvdpat);
 
 
 		new JFrame();
@@ -130,7 +132,7 @@ public class RicercaGUI extends JFrame{
 		updateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Libro selectedObject = (Libro) results.getSelectedValue();
-				selectedObject.addPropertyChangeListener(recvdpat);
+				pc.interessatoButtonClick(recvdpat, selectedObject);
 				Boolean initialValue = selectedObject.getIsAvailable();
 				JOptionPane.showMessageDialog(RicercaGUI.this,"You will be notified when the book is available!");
 				if (selectedObject.getIsAvailable() != initialValue) {

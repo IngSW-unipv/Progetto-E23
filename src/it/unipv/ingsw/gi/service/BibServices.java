@@ -151,6 +151,9 @@ public class BibServices {
 		admdao.cancellapatron(patrono, biblioteca);
 	}
 	
+	public void serInterssato(Patrono patrono,Libro libro) {
+		libro.addPropertyChangeListener(patrono);
+	}
 	
 	
 	//filler methods 
