@@ -8,8 +8,11 @@ Benvenuti nel Sistema di Gestione Bibliotecaria, una soluzione efficiente proget
 
 ## funzioni principali
 .Prendere In Prestito e restituire libro 
+
 .Prenotare posto
+
 .Ricercare libro
+
 .Acquistare libro
 
 # Caratteristiche:
