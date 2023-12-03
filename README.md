@@ -7,8 +7,10 @@ Progetto Gruppo GoblinEnterprise
 Benvenuti nel Sistema di Gestione Bibliotecaria, una soluzione efficiente progettata per semplificare la gestione delle biblioteche. Questo sistema è stato creato con l'obiettivo di fornire ai bibliotecari e al personale bibliotecario strumenti per organizzare, catalogare e mantenere una vasta collezione di libri e altri materiali.
 
 ## funzioni principali
-.prendere in prestito 
-.
+.Prendere In Prestito e restituire libro 
+.Prenotare posto
+.Ricercare libro
+.Acquistare libro
 
 # Caratteristiche:
 1.  ## Gestione del Catalogo:
