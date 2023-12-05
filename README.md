@@ -34,7 +34,7 @@ Garantisci la sicurezza dei dati della tua biblioteca con controlli di accesso r
 Definisci ruoli utente e autorizzazioni per limitare l'accesso in base alle responsabilità, proteggendo informazioni sensibili e garantendo l'integrità dei dati.
 
 
-### Link per Presentazione : https://1drv.ms/p/s!Agw3McqBqf4IkByg5eoWfTYx-_o7?e=TL80jG
+
 
 <p align="center">
   <img src="https://github.com/IngSW-unipv/Progetto-E23/assets/119743134/dc780f4a-23aa-4796-a64d-8fb62ba46dfe">
